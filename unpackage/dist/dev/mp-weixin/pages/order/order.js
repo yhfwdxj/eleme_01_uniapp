@@ -4,5 +4,5 @@ const _sfc_main = {};
 function _sfc_render(_ctx, _cache) {
   return {};
 }
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/Study/myWork/eleme_01_uniapp/pages/index/index.vue"]]);
+var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/Study/myWork/eleme_01_uniapp/pages/order/order.vue"]]);
 wx.createPage(MiniProgramPage);
