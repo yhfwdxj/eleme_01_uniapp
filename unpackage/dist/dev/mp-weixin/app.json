@@ -16,20 +16,20 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/饿了么首页.png",
-        "selectedIconPath": "static/饿了么首页.png"
+        "iconPath": "static/饿了么index-unselect.png",
+        "selectedIconPath": "static/饿了么index-select.png"
       },
       {
         "pagePath": "pages/order/order",
         "text": "订单",
         "iconPath": "static/订单.png",
-        "selectedIconPath": "static/订单.png"
+        "selectedIconPath": "static/订单select.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "static/我的.png",
-        "selectedIconPath": "static/我的.png"
+        "selectedIconPath": "static/我的select.png"
       }
     ]
   },
