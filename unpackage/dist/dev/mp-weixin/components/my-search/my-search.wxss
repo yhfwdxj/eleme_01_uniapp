@@ -23,35 +23,32 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.header-container, .search-box {
-  background-color: #cf1b1e;
-}
-.search-box {
-  padding-top: 10rpx;
-  height: 80rpx;
-}
-.header-container {
+.my-search {
   display: flex;
   justify-content: space-between;
-  padding-top: 20rpx;
+  border: 2rpx solid gray;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 36rpx;
+  background-color: #ffffff;
+  height: 60rpx;
 }
-.header-container .location {
-  margin-left: 15rpx;
-}
-.header-container .location text {
-  position: relative;
-}
-.header-container .location text ::after {
-  content: "";
-  position: absolute;
-  top: 19rpx;
-  border-top: 10rpx solid #5b5b5b;
-  border-bottom: 10rpx solid transparent;
-  border-left: 10rpx solid transparent;
-  border-right: 10rpx solid transparent;
-}
-.header-container .shop-cart-message {
+.my-search .search {
+  width: 80%;
+  border-radius: 36rpx;
   display: flex;
-  width: 160rpx;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+}
+.my-search .search input {
+  margin-left: 2rpx;
+}
+.my-search .text-container {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fd8a4b;
+  border-radius: 36rpx;
+  color: white;
 }

@@ -1,1 +1,1 @@
-<view>首页</view>
+<view class="header-container"><view class="location"><text>天河区</text></view><view class="shop-cart-message"><view class="cart"><image src="/static/_购物车.png" alt="" style="{{'width:' + a + ';' + ('height:' + b)}}"></image></view><view class="message"><image src="/static/留言.png" alt="" style="{{'width:' + c + ';' + ('height:' + d)}}"></image></view></view></view><view class="search-box"><my-search u-i="537f919e-0" bind:__l="__l"></my-search></view>

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "饿了么",
-  "usingComponents": {}
+  "usingComponents": {
+    "my-search": "../../components/my-search/my-search"
+  }
 }

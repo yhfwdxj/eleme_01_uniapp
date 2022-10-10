@@ -6,9 +6,9 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarTitleText": "饿了么",
+    "navigationBarBackgroundColor": "#cf1b1e",
+    "backgroundColor": "#cf1b1e"
   },
   "tabBar": {
     "selectedColor": "#55aaff",
