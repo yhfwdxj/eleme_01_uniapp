@@ -15,10 +15,21 @@
     {
       "path": "pages/user/user",
       "style": {
-        "navigationBarTitleText": "饿了么"
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
       }
     }
   ],
+  "subPackages": [{
+    "root": "subpkg",
+    "pages": [{
+      "path": "city/city",
+      "style": {
+        "navigationBarTitleText": "饿了么"
+      }
+    }]
+
+  }],
   "tabBar": {
     "selectedColor": "#55aaff",
     "list": [{

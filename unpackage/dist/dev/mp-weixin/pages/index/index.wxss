@@ -26,6 +26,26 @@
 .header-container, .search-box {
   background-color: #cf1b1e;
 }
+swiper {
+  height: 350rpx;
+}
+swiper .nav {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10rpx;
+}
+swiper .nav .nav-list {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+swiper .nav .nav-list image {
+  width: 100rpx;
+  height: 100rpx;
+}
 .search-box {
   padding-top: 10rpx;
   height: 80rpx;
@@ -37,14 +57,18 @@
 }
 .header-container .location {
   margin-left: 15rpx;
+  height: 50%;
+  display: flex;
+  justify-content: center;
 }
 .header-container .location text {
   position: relative;
+  line-height: 30rpx;
 }
 .header-container .location text ::after {
   content: "";
   position: absolute;
-  top: 19rpx;
+  top: 10rpx;
   border-top: 10rpx solid #5b5b5b;
   border-bottom: 10rpx solid transparent;
   border-left: 10rpx solid transparent;
