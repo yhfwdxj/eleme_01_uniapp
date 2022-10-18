@@ -30,12 +30,15 @@ if (!Math) {
 const _sfc_main = {
   __name: "index",
   setup(__props) {
+    const store = common_vendor.useStore();
     const request = common_vendor.inject("request");
+    store.dispatch("city/getCityList", "guess");
+    const curCityList = common_vendor.computed$1(() => store.state.city.curCityList);
     let data1 = common_vendor.ref();
     let data2 = common_vendor.ref();
     common_vendor.onLoad(async () => {
       let res = await request({
-        url: "index_entry"
+        url: "v2/index_entry"
       });
       res = res.map((item) => {
         return __spreadProps(__spreadValues({}, item), {
@@ -44,22 +47,28 @@ const _sfc_main = {
       });
       data1.value = res.splice(0, 8);
       data2.value = res;
-      console.log(data2.value);
     });
+    const goCityList = () => {
+      common_vendor.index.navigateTo({
+        url: "/subpkg/city/city"
+      });
+    };
     return (_ctx, _cache) => {
       return {
-        a: 40 + "rpx",
-        b: 40 + "rpx",
+        a: common_vendor.t(common_vendor.unref(curCityList).name),
+        b: common_vendor.o(goCityList),
         c: 40 + "rpx",
         d: 40 + "rpx",
-        e: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
+        e: 40 + "rpx",
+        f: 40 + "rpx",
+        g: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
           return {
             a: item.image_url,
             b: common_vendor.t(item.title),
             c: index
           };
         }),
-        f: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
+        h: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
           return {
             a: item.image_url,
             b: common_vendor.t(item.title),

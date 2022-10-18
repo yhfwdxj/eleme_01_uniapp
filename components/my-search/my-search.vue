@@ -30,9 +30,7 @@
       justify-content: space-between;
       align-items: center;
 
-      input {
-        margin-left: 2rpx;
-      }
+
     }
 
     .text-container {

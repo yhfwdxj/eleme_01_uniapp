@@ -17,10 +17,11 @@ import {
 import {
   request
 } from '@/utils/request.js'
-
+import store from "@/store"
 export function createApp() {
   const app = createSSRApp(App)
   app.provide('request', request)
+  app.use(store)
   return {
     app
   }

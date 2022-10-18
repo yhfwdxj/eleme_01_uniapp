@@ -13,10 +13,34 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "2.26.2",
+  "libVersion": "",
   "appid": "wxb0f4796c826b3473",
   "projectname": "eleme_01_uniapp",
-  "condition": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 0,
+      "list": [
+        {
+          "name": "",
+          "path": "",
+          "query": "",
+          "id": 0
+        }
+      ]
+    }
+  },
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

@@ -1,8 +1,8 @@
 <template>
   <view style="background-color: rgb(245, 245, 245);">
     <view class="header-container">
-      <view class="location">
-        <text>天河区</text>
+      <view class="location" @click="goCityList">
+        <text>{{curCityList.name}}</text>
       </view>
       <view class="shop-cart-message">
         <view class="cart">
@@ -35,24 +35,30 @@
       </swiper-item>
     </swiper>
     <view class="recommend-shop">
-
     </view>
   </view>
 </template>
 <script setup>
   import {
     inject,
-    ref
+    ref,
+    computed
   } from 'vue'
   import {
     onLoad
   } from '@dcloudio/uni-app'
+  import {
+    useStore
+  } from 'vuex'
+  const store = useStore()
   const request = inject('request')
+  store.dispatch('city/getCityList', 'guess')
+  const curCityList = computed(() => store.state.city.curCityList)
   let data1 = ref()
   let data2 = ref()
   onLoad(async () => {
     let res = await request({
-      url: 'index_entry'
+      url: 'v2/index_entry'
     })
     res = res.map(item => {
       return {
@@ -62,8 +68,13 @@
     })
     data1.value = res.splice(0, 8)
     data2.value = res
-    console.log(data2.value);
   })
+  const goCityList = () => {
+    uni.navigateTo({
+      url: '/subpkg/city/city'
+    })
+  }
+
   // https://fuss10.elemecdn.com
 </script>
 <style lang="scss">

@@ -1,4 +1,4 @@
-const baseUrl = 'https://elm.cangdu.org/v2/'
+const baseUrl = 'https://elm.cangdu.org/'
 
 export const request = (options) => {
   return new Promise((resolve, reject) => {

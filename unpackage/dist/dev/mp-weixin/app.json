@@ -41,5 +41,6 @@
       }
     ]
   },
+  "permission": {},
   "usingComponents": {}
 }
