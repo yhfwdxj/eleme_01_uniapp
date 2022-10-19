@@ -13,7 +13,7 @@
         <text>热门城市:</text>
       </view>
       <view class="hot-city">
-        <view v-for="(item,index) in hotCityList" :key="index" class="hot-city-list">
+        <view v-for="(item,index) in hotCityList" :key="index" class="hot-city-list" @click="changeCur(item)">
           {{item.name}}
         </view>
       </view>
@@ -24,7 +24,7 @@
         <text class="single">{{k}}:</text>
       </view>
       <view class="group-container" v-for="orderList,i in order" :key="i">
-        <text class="city-name">{{orderList.name}}</text>
+        <text class="city-name" @click="changeCur2(orderList)">{{orderList.name}}</text>
       </view>
     </view>
   </view>
@@ -61,10 +61,17 @@
   })
   const goToCity = () => {
     uni.navigateTo({
-      url: '',
-      success: res => {},
-      fail: () => {},
-      complete: () => {}
+      url: '/subpkg/location/location?city_id=' + curCityList.value.id
+    });
+  }
+  const changeCur = (item) => {
+    uni.navigateTo({
+      url: '/subpkg/location/location?city_id=' + item.id
+    });
+  }
+  const changeCur2 = (item) => {
+    uni.navigateTo({
+      url: '/subpkg/location/location?city_id=' + item.id
     });
   }
 </script>

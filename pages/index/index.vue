@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="search-box">
-      <my-search></my-search>
+      <my-search :placeholder='placeholder'></my-search>
     </view>
     <swiper :indicator-dots="true" :autoplay="true" :interval="5000" :duration="1000">
       <swiper-item>
@@ -74,7 +74,7 @@
       url: '/subpkg/city/city'
     })
   }
-
+  const placeholder = ref('请输入商家或美食')
   // https://fuss10.elemecdn.com
 </script>
 <style lang="scss">

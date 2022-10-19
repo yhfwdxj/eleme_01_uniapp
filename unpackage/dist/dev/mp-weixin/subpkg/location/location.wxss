@@ -23,32 +23,26 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.my-search {
+.location-container .cur-city {
+  margin-top: 10rpx;
+  margin-left: 10rpx;
   display: flex;
   justify-content: space-between;
-  border: 2rpx solid gray;
-  width: 90%;
-  margin-left: 5%;
-  border-radius: 36rpx;
-  background-color: #ffffff;
-  height: 60rpx;
 }
-.my-search .search {
-  width: 80%;
-  border-radius: 36rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.location-container .input {
+  margin-top: 20rpx;
 }
-.my-search .search .input-search {
-  margin-left: 20rpx;
+.location-container .search-result {
+  margin-top: 20rpx;
 }
-.my-search .text-container {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fd8a4b;
-  border-radius: 36rpx;
-  color: white;
+.location-container .search-result .search-list {
+  margin: 10rpx 15rpx;
+  border-bottom: 2rpx solid #e4e4e4;
+}
+.location-container .search-result .search-list .name {
+  font-size: 36rpx;
+}
+.location-container .search-result .search-list .address {
+  font-size: 30rpx;
+  color: #999999;
 }

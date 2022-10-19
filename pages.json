@@ -27,7 +27,16 @@
       "style": {
         "navigationBarTitleText": "饿了么"
       }
-    }]
+    }    ,{
+                    "path" : "location/location",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 
   }],
   "tabBar": {

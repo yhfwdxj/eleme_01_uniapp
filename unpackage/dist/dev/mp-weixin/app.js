@@ -10,6 +10,7 @@ if (!Math) {
   "./pages/order/order.js";
   "./pages/user/user.js";
   "./subpkg/city/city.js";
+  "./subpkg/location/location.js";
 }
 const _sfc_main = {
   onLaunch: function() {

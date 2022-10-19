@@ -23,13 +23,17 @@ const _sfc_main = {
     });
     const goToCity = () => {
       common_vendor.index.navigateTo({
-        url: "",
-        success: (res) => {
-        },
-        fail: () => {
-        },
-        complete: () => {
-        }
+        url: "/subpkg/location/location?city_id=" + curCityList.value.id
+      });
+    };
+    const changeCur = (item) => {
+      common_vendor.index.navigateTo({
+        url: "/subpkg/location/location?city_id=" + item.id
+      });
+    };
+    const changeCur2 = (item) => {
+      common_vendor.index.navigateTo({
+        url: "/subpkg/location/location?city_id=" + item.id
       });
     };
     return (_ctx, _cache) => {
@@ -43,7 +47,8 @@ const _sfc_main = {
         e: common_vendor.f(common_vendor.unref(hotCityList), (item, index, i0) => {
           return {
             a: common_vendor.t(item.name),
-            b: index
+            b: index,
+            c: common_vendor.o(($event) => changeCur(item), index)
           };
         }),
         f: common_vendor.f(common_vendor.unref(groupCityOrder), (order, k, i) => {
@@ -54,7 +59,8 @@ const _sfc_main = {
             c: common_vendor.f(order, (orderList, i2, i1) => {
               return {
                 a: common_vendor.t(orderList.name),
-                b: i2
+                b: common_vendor.o(($event) => changeCur2(orderList)),
+                c: i2
               };
             }),
             d: i

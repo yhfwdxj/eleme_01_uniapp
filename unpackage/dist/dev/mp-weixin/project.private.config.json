@@ -13,6 +13,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/location/location",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/city/city",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

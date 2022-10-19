@@ -53,6 +53,7 @@ const _sfc_main = {
         url: "/subpkg/city/city"
       });
     };
+    const placeholder = common_vendor.ref("\u8BF7\u8F93\u5165\u5546\u5BB6\u6216\u7F8E\u98DF");
     return (_ctx, _cache) => {
       return {
         a: common_vendor.t(common_vendor.unref(curCityList).name),
@@ -61,14 +62,17 @@ const _sfc_main = {
         d: 40 + "rpx",
         e: 40 + "rpx",
         f: 40 + "rpx",
-        g: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
+        g: common_vendor.p({
+          placeholder: placeholder.value
+        }),
+        h: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
           return {
             a: item.image_url,
             b: common_vendor.t(item.title),
             c: index
           };
         }),
-        h: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
+        i: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
           return {
             a: item.image_url,
             b: common_vendor.t(item.title),
