@@ -1,15 +1,40 @@
 <template>
   <view class="my-search">
     <view class="search">
-      <input type="text" name="" id="" placeholder="请输入">
+      <input type="search" :placeholder="placeholder" class="input-search" v-model="keyword">
     </view>
-    <view class="text-container">
+    <view class="text-container" @click="search">
       <text>搜索</text>
     </view>
   </view>
 </template>
 
-<script>
+<script setup>
+  import {
+    ref
+  } from 'vue'
+  import {
+    onLoad
+  } from '@dcloudio/uni-app'
+  import {
+    request
+  } from '@/utils/request.js'
+  let id = ref('')
+  onLoad((options) => {
+    id = options.city_id
+  })
+  const props = defineProps(['placeholder'])
+  const emit = defineEmits(['searchContext'])
+  const keyword = ref('')
+  let res = ref('')
+  const search = async () => {
+    if (id && keyword.value) {
+      res = await request({
+        url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
+      })
+      emit('searchContext', res)
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -30,8 +55,8 @@
       justify-content: space-between;
       align-items: center;
 
-      input {
-        margin-left: 2rpx;
+      .input-search {
+        margin-left: 20rpx;
       }
     }
 

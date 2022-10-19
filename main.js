@@ -5,15 +5,23 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-    ...App
+  ...App
 })
 app.$mount()
 // #endif
 
 // #ifdef VUE3
-import { createSSRApp } from 'vue'
+import {
+  createSSRApp
+} from 'vue'
+import {
+  request
+} from '@/utils/request.js'
+import store from "@/store"
 export function createApp() {
   const app = createSSRApp(App)
+  app.provide('request', request)
+  app.use(store)
   return {
     app
   }

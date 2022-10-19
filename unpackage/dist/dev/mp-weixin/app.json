@@ -4,6 +4,15 @@
     "pages/order/order",
     "pages/user/user"
   ],
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "pages": [
+        "city/city",
+        "location/location"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "饿了么",

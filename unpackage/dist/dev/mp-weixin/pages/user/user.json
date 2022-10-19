@@ -1,4 +1,5 @@
 {
-  "navigationBarTitleText": "饿了么",
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
   "usingComponents": {}
 }

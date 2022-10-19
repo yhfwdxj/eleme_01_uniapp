@@ -40,8 +40,8 @@
   justify-content: space-between;
   align-items: center;
 }
-.my-search .search input {
-  margin-left: 2rpx;
+.my-search .search .input-search {
+  margin-left: 20rpx;
 }
 .my-search .text-container {
   width: 20%;
