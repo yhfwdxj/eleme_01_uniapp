@@ -19,7 +19,7 @@
       <view class="history">
         <text>历史选择地址:</text>
       </view>
-      <view class="search-list" v-for="item,i in curplace" :key="i">
+      <view class="search-list" v-for="item,i in curplace" :key="i" @click="goIndex">
         <view class="name">{{item.name}}</view>
         <view class="address">{{item.address}}</view>
       </view>
@@ -79,6 +79,7 @@
       })
       if (setflag) {
         curplace.value.push(item)
+        curplace.value.reverse()
       }
       uni.setStorageSync('curplace', JSON.stringify(curplace.value))
       console.log(curplace.value);
@@ -86,6 +87,14 @@
       curplace.value.push(item)
       uni.setStorageSync('curplace', JSON.stringify(curplace.value))
     }
+    uni.switchTab({
+      url: "/pages/index/index"
+    })
+  }
+  const goIndex = () => {
+    uni.switchTab({
+      url: "/pages/index/index"
+    })
   }
 </script>
 
