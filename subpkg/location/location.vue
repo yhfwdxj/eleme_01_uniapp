@@ -19,7 +19,7 @@
       <view class="history">
         <text>历史选择地址:</text>
       </view>
-      <view class="search-list" v-for="item,i in curplace" :key="i" @click="goIndex">
+      <view class="search-list" v-for="item,i in curplace" :key="i" @click="goIndex(item)">
         <view class="name">{{item.name}}</view>
         <view class="address">{{item.address}}</view>
       </view>
@@ -72,9 +72,12 @@
     let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')
     curplace.value = allplace
     if (allplace.length > 0) {
-      curplace.value.forEach((cur) => {
+      curplace.value.forEach((cur, i) => {
         if (cur.geohash === item.geohash) {
           setflag = false
+          curplace.value.splice(i, i)
+          curplace.value.push(item)
+          curplace.value.reverse()
         }
       })
       if (setflag) {
@@ -82,7 +85,6 @@
         curplace.value.reverse()
       }
       uni.setStorageSync('curplace', JSON.stringify(curplace.value))
-      console.log(curplace.value);
     } else {
       curplace.value.push(item)
       uni.setStorageSync('curplace', JSON.stringify(curplace.value))
@@ -91,7 +93,23 @@
       url: "/pages/index/index"
     })
   }
-  const goIndex = () => {
+  const goIndex = (item) => {
+    console.log(item);
+    let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')
+    curplace.value = allplace
+    curplace.value.forEach((cur, i) => {
+      if (cur.geohash === item.geohash) {
+        setflag = false
+        curplace.value.splice(i, i)
+        curplace.value.push(item)
+        curplace.value.reverse()
+      }
+    })
+    if (setflag) {
+      curplace.value.push(item)
+      curplace.value.reverse()
+    }
+    uni.setStorageSync('curplace', JSON.stringify(curplace.value))
     uni.switchTab({
       url: "/pages/index/index"
     })
