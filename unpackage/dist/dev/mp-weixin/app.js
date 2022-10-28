@@ -5,12 +5,15 @@ var common_vendor = require("./common/vendor.js");
 var utils_request = require("./utils/request.js");
 var store_index = require("./store/index.js");
 require("./store/modules/city.js");
+require("./store/modules/restaurants.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/order/order.js";
   "./pages/user/user.js";
   "./subpkg/city/city.js";
   "./subpkg/location/location.js";
+  "./subpkg/search/search.js";
+  "./subpkg/shop/shop.js";
 }
 const _sfc_main = {
   onLaunch: function() {

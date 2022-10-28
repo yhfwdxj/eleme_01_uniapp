@@ -4,11 +4,13 @@ var utils_request = require("../../utils/request.js");
 const _sfc_main = {
   __name: "my-search",
   props: ["placeholder"],
-  emits: ["searchContext"],
+  emits: ["searchContext", "searchRestaurants"],
   setup(__props, { emit }) {
     let id = common_vendor.ref("");
+    let geohash = common_vendor.ref("");
     common_vendor.onLoad((options) => {
       id = options.city_id;
+      geohash = options.geohash;
     });
     const keyword = common_vendor.ref("");
     let res = common_vendor.ref("");
@@ -18,6 +20,11 @@ const _sfc_main = {
           url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
         });
         emit("searchContext", res);
+      } else {
+        res = await utils_request.request({
+          url: `v4/restaurants?geohash=${geohash}&keyword=${keyword.value}`
+        });
+        emit("searchRestaurants", res);
       }
     };
     return (_ctx, _cache) => {

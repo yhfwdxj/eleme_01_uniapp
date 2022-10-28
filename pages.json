@@ -3,7 +3,8 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "饿了么"
+        "navigationBarTitleText": "饿了么",
+        "onReachBottomDistance": 300
       }
     },
     {
@@ -27,8 +28,24 @@
       "style": {
         "navigationBarTitleText": "饿了么"
       }
+    }, {
+      "path": "location/location",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
     }    ,{
-                    "path" : "location/location",
+                    "path" : "search/search",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "shop/shop",
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",

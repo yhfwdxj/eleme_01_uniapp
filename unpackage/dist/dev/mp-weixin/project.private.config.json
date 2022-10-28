@@ -17,7 +17,7 @@
         {
           "name": "",
           "pathName": "subpkg/location/location",
-          "query": "",
+          "query": "city_id=4",
           "launchMode": "default",
           "scene": null
         },
@@ -25,6 +25,20 @@
           "name": "",
           "pathName": "subpkg/city/city",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/index/index",
+          "query": "geohash=23.131515,113.382709",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/search/search",
+          "query": "geohash=23.126507%2C113.378079",
           "launchMode": "default",
           "scene": null
         }

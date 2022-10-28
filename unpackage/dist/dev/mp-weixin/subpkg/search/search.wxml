@@ -1,0 +1,1 @@
+<view class="search-box"><view class="my-search" bindtap="{{c}}"><my-search wx:if="{{b}}" bindsearchRestaurants="{{a}}" u-i="287dea56-0" bind:__l="__l" u-p="{{b}}"></my-search></view><view wx:if="{{d}}" class=""><my-restaurants wx:if="{{e}}" u-i="287dea56-1" bind:__l="__l" u-p="{{e}}"></my-restaurants></view></view>

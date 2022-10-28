@@ -18,13 +18,14 @@ const _sfc_main = {
       curCity.value = await utils_request.request({
         url: `v1/cities/${options.city_id}`
       });
+      let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
+      curplace.value = allplace;
     });
     let res = common_vendor.ref();
     const placeholder = common_vendor.ref("\u8BF7\u8F93\u5165\u5730\u5740");
     const searchContext = (emit) => {
-      if (emit.length !== 0) {
+      if (emit.length >= 1) {
         res.value = emit;
-        console.log(emit);
       } else {
         common_vendor.index.showToast({
           title: "\u65E0\u8FD4\u56DE\u5185\u5BB9",
@@ -37,20 +38,65 @@ const _sfc_main = {
         url: `/subpkg/city/city`
       });
     };
+    let curplace = common_vendor.ref([]);
+    let setflag = true;
     const curAddress = (item) => {
-      common_vendor.index.redirectTo({
-        url: `/pages/index/index?geohash=${item.latitude},${item.longitude}`
+      let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
+      curplace.value = allplace;
+      if (allplace.length > 0) {
+        curplace.value.forEach((cur, i) => {
+          if (cur.geohash === item.geohash) {
+            setflag = false;
+            curplace.value.splice(i, i);
+            curplace.value.push(item);
+            curplace.value.reverse();
+          }
+        });
+        if (setflag) {
+          curplace.value.push(item);
+          curplace.value.reverse();
+        }
+        common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
+      } else {
+        curplace.value.push(item);
+        common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
+      }
+      common_vendor.index.switchTab({
+        url: "/pages/index/index"
+      });
+    };
+    const goIndex = (item) => {
+      console.log(item);
+      let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
+      curplace.value = allplace;
+      curplace.value.forEach((cur, i) => {
+        if (cur.geohash === item.geohash) {
+          setflag = false;
+          curplace.value.splice(i, i);
+          curplace.value.push(item);
+          curplace.value.reverse();
+        }
+      });
+      if (setflag) {
+        curplace.value.push(item);
+        curplace.value.reverse();
+      }
+      common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
+      common_vendor.index.switchTab({
+        url: "/pages/index/index"
       });
     };
     return (_ctx, _cache) => {
-      return {
+      return common_vendor.e({
         a: common_vendor.t(common_vendor.unref(curCity).name),
         b: common_vendor.o(changeCity),
         c: common_vendor.o(searchContext),
         d: common_vendor.p({
           placeholder: placeholder.value
         }),
-        e: common_vendor.f(common_vendor.unref(res), (item, i, i0) => {
+        e: common_vendor.unref(res)
+      }, common_vendor.unref(res) ? {
+        f: common_vendor.f(common_vendor.unref(res), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.address),
@@ -58,7 +104,16 @@ const _sfc_main = {
             d: common_vendor.o(($event) => curAddress(item), i)
           };
         })
-      };
+      } : {
+        g: common_vendor.f(common_vendor.unref(curplace), (item, i, i0) => {
+          return {
+            a: common_vendor.t(item.name),
+            b: common_vendor.t(item.address),
+            c: i,
+            d: common_vendor.o(($event) => goIndex(item), i)
+          };
+        })
+      });
     };
   }
 };

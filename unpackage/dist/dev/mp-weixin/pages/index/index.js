@@ -21,11 +21,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var common_vendor = require("../../common/vendor.js");
 if (!Array) {
   const _easycom_my_search2 = common_vendor.resolveComponent("my-search");
-  _easycom_my_search2();
+  const _easycom_my_restaurants2 = common_vendor.resolveComponent("my-restaurants");
+  (_easycom_my_search2 + _easycom_my_restaurants2)();
 }
 const _easycom_my_search = () => "../../components/my-search/my-search.js";
+const _easycom_my_restaurants = () => "../../components/my-restaurants/my-restaurants.js";
 if (!Math) {
-  _easycom_my_search();
+  (_easycom_my_search + _easycom_my_restaurants)();
 }
 const _sfc_main = {
   __name: "index",
@@ -33,9 +35,24 @@ const _sfc_main = {
     const store = common_vendor.useStore();
     const request = common_vendor.inject("request");
     store.dispatch("city/getCityList", "guess");
-    const curCityList = common_vendor.computed$1(() => store.state.city.curCityList);
+    let resList = common_vendor.reactive({
+      curCityList: "",
+      curRest: ""
+    });
+    resList.curCityList = common_vendor.computed$1(() => store.state.city.curCityList);
+    resList.curRest = common_vendor.computed$1(() => store.state.restaurants.restList);
     let data1 = common_vendor.ref();
     let data2 = common_vendor.ref();
+    let location = common_vendor.ref("");
+    let latitude = common_vendor.ref();
+    let longitude = common_vendor.ref();
+    let curPlace = common_vendor.ref();
+    let geohash = common_vendor.ref();
+    const goSearch = () => {
+      common_vendor.index.navigateTo({
+        url: `/subpkg/search/search?geohash=${geohash}`
+      });
+    };
     common_vendor.onLoad(async () => {
       let res = await request({
         url: "v2/index_entry"
@@ -48,6 +65,32 @@ const _sfc_main = {
       data1.value = res.splice(0, 8);
       data2.value = res;
     });
+    common_vendor.onShow(() => {
+      curPlace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
+      if (curPlace.length) {
+        latitude.value = curPlace[0].latitude;
+        longitude.value = curPlace[0].longitude;
+        location.value = curPlace[0].name;
+        geohash = curPlace[0].geohash;
+        store.dispatch("restaurants/getRestaurants", {
+          latitude,
+          longitude,
+          order_by: 4,
+          limit: 10
+        });
+      }
+    });
+    let offset = 10;
+    common_vendor.onReachBottom(() => {
+      store.dispatch("restaurants/getRestaurants", {
+        latitude,
+        longitude,
+        order_by: 4,
+        limit: 10,
+        offset
+      });
+      offset += 10;
+    });
     const goCityList = () => {
       common_vendor.index.navigateTo({
         url: "/subpkg/city/city"
@@ -55,31 +98,36 @@ const _sfc_main = {
     };
     const placeholder = common_vendor.ref("\u8BF7\u8F93\u5165\u5546\u5BB6\u6216\u7F8E\u98DF");
     return (_ctx, _cache) => {
-      return {
-        a: common_vendor.t(common_vendor.unref(curCityList).name),
-        b: common_vendor.o(goCityList),
-        c: 40 + "rpx",
+      return common_vendor.e({
+        a: common_vendor.unref(location)
+      }, common_vendor.unref(location) ? {
+        b: common_vendor.t(common_vendor.unref(location))
+      } : {}, {
+        c: common_vendor.o(goCityList),
         d: 40 + "rpx",
         e: 40 + "rpx",
         f: 40 + "rpx",
-        g: common_vendor.p({
+        g: 40 + "rpx",
+        h: common_vendor.p({
           placeholder: placeholder.value
         }),
-        h: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
+        i: common_vendor.o(goSearch),
+        j: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
           return {
             a: item.image_url,
             b: common_vendor.t(item.title),
             c: index
           };
         }),
-        i: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
+        k: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
           return {
             a: item.image_url,
             b: common_vendor.t(item.title),
             c: index
           };
-        })
-      };
+        }),
+        l: common_vendor.p(__spreadValues({}, common_vendor.unref(resList)))
+      });
     };
   }
 };

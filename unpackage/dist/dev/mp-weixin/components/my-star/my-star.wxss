@@ -23,31 +23,23 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.location-container .cur-city {
-  margin-top: 10rpx;
-  margin-left: 10rpx;
+.star .have1 .have2 .have-img, .star .none .none-img {
+  width: 30rpx;
+  height: 50rpx;
+}
+.star .none {
   display: flex;
-  justify-content: space-between;
+  width: 150rpx;
+  height: 50rpx;
 }
-.location-container .input {
-  margin-top: 20rpx;
+.star .have1 {
+  display: flex;
+  position: relative;
+  top: -50rpx;
 }
-.location-container .search-result {
-  margin-top: 20rpx;
-}
-.location-container .search-result .history {
-  margin: 20rpx 10rpx;
-  border-bottom: 2rpx solid #e4e4e4;
-  font-size: 40rpx;
-}
-.location-container .search-result .search-list {
-  margin: 10rpx 15rpx;
-  border-bottom: 2rpx solid #e4e4e4;
-}
-.location-container .search-result .search-list .name {
-  font-size: 36rpx;
-}
-.location-container .search-result .search-list .address {
-  font-size: 30rpx;
-  color: #999999;
+.star .have1 .have2 {
+  width: 150rpx;
+  height: 50rpx;
+  white-space: nowrap;
+  overflow: hidden;
 }

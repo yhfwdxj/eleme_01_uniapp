@@ -20,11 +20,13 @@
     request
   } from '@/utils/request.js'
   let id = ref('')
+  let geohash = ref('')
   onLoad((options) => {
     id = options.city_id
+    geohash = options.geohash
   })
   const props = defineProps(['placeholder'])
-  const emit = defineEmits(['searchContext'])
+  const emit = defineEmits(['searchContext', 'searchRestaurants'])
   const keyword = ref('')
   let res = ref('')
   const search = async () => {
@@ -33,6 +35,11 @@
         url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
       })
       emit('searchContext', res)
+    } else {
+      res = await request(({
+        url: `v4/restaurants?geohash=${geohash}&keyword=${keyword.value}`
+      }))
+      emit('searchRestaurants', res)
     }
   }
 </script>

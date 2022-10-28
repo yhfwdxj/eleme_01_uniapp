@@ -9,7 +9,9 @@
       "root": "subpkg",
       "pages": [
         "city/city",
-        "location/location"
+        "location/location",
+        "search/search",
+        "shop/shop"
       ]
     }
   ],

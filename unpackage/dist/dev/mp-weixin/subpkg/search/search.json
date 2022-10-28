@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "饿了么",
-  "onReachBottomDistance": 300,
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "my-search": "../../components/my-search/my-search",
     "my-restaurants": "../../components/my-restaurants/my-restaurants"
