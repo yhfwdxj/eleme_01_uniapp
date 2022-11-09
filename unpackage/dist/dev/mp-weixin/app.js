@@ -6,6 +6,7 @@ var utils_request = require("./utils/request.js");
 var store_index = require("./store/index.js");
 require("./store/modules/city.js");
 require("./store/modules/restaurants.js");
+require("./store/modules/shopcart.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/order/order.js";

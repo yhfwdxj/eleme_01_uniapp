@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "my-shopcart": "../../components/my-shopcart/my-shopcart"
+  }
 }

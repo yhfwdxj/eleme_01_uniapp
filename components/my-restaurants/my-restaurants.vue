@@ -42,6 +42,7 @@
   } from '@dcloudio/uni-app'
   const props = defineProps(['curCityList', 'curRest', 'searchRest'])
   const imgBaseUrl = 'https://elm.cangdu.org/img/'
+  // const imgBaseUrl = '/img/'
   let curCityList = computed(() => props.curCityList)
   let curRest = computed(() => props.curRest)
   let searchRest = computed(() => props.searchRest)

@@ -66,7 +66,6 @@ const _sfc_main = {
       });
     };
     const goIndex = (item) => {
-      console.log(item);
       let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
       curplace.value = allplace;
       curplace.value.forEach((cur, i) => {

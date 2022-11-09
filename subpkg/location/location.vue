@@ -94,7 +94,6 @@
     })
   }
   const goIndex = (item) => {
-    console.log(item);
     let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')
     curplace.value = allplace
     curplace.value.forEach((cur, i) => {

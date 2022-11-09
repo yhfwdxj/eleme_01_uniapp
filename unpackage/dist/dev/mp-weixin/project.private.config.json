@@ -41,6 +41,13 @@
           "query": "geohash=23.126507%2C113.378079",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/shop/shop",
+          "query": "shop_id=3283",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
