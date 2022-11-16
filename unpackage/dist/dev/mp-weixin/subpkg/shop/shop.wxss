@@ -102,6 +102,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding-bottom: 45rpx;
 }
 .container .food-review .scroll .right-scroll .title.data-v-2a42858c {
   font-size: 32rpx;
@@ -148,24 +149,46 @@
   right: 30rpx;
   bottom: 15rpx;
 }
-.container .food-review .scroll .right-scroll .right .sale-info .price-cart .cart.data-v-2a42858c .uni-numbox__value.data-v-dd94a2a8 {
-  width: 40rpx;
-  height: 44rpx;
-}
 .container .food-review .shop-cart.data-v-2a42858c {
   position: fixed;
   bottom: 0;
   left: 5%;
-  height: 130rpx;
-  display: flex;
   background-color: white;
+}
+.container .food-review .shop-cart .haveFood .curFood.data-v-2a42858c {
+  display: flex;
+  height: 120rpx;
+}
+.container .food-review .shop-cart .haveFood .curFood .curfood-info .price-num.data-v-2a42858c {
+  display: flex;
+}
+.container .food-review .shop-cart .haveFood .curFood .curfood-info .price-num .change-num.data-v-2a42858c {
+  display: flex;
+}
+.container .food-review .shop-cart .haveFood .curFood .curfood-info .price-num .change-num .reduce-num.data-v-2a42858c {
+  display: flex;
+}
+.container .food-review .shop-cart .haveFood .curFood .curfood-info .price-num .change-num .reduce-num .num.data-v-2a42858c {
+  width: 40rpx;
+  text-align: center;
+}
+.container .food-review .shop-cart .haveFood .curFood .curfood-info .price-num .price.data-v-2a42858c {
+  margin-top: 20rpx;
+}
+.container .food-review .shop-cart .haveFood .curFood .curfood-info .price-num .food-num.data-v-2a42858c {
+  position: absolute;
+  right: 65.7rpx;
+  margin-top: 20rpx;
+}
+.container .food-review .shop-cart .noFood.data-v-2a42858c {
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.container .food-review .shop-cart .cart-info.data-v-2a42858c {
+.container .food-review .shop-cart .noFood .cart-info.data-v-2a42858c {
   display: flex;
   margin-left: 5%;
 }
-.container .food-review .shop-cart .go-order.data-v-2a42858c {
+.container .food-review .shop-cart .noFood .go-order.data-v-2a42858c {
   margin-right: 5%;
 }

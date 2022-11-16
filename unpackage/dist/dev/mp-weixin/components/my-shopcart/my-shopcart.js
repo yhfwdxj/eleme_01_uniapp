@@ -3,41 +3,44 @@ var common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "my-shopcart",
   props: ["item2", "shopId"],
-  setup(__props) {
+  emits: ["curNum"],
+  setup(__props, { emit }) {
     const props = __props;
     const store = common_vendor.useStore();
-    let num = common_vendor.ref(0);
-    const foodInfo = props.item2;
-    props.shopId;
+    const foodInfo = common_vendor.computed$1(() => props.item2);
+    common_vendor.computed$1(() => props.shopId);
     let foodList = common_vendor.reactive({
       attrs: [],
       extra: {},
-      id: foodInfo.item_id,
-      name: foodInfo.name,
-      packing_fee: foodInfo.specfoods[0].packing_fee,
-      price: foodInfo.specfoods[0].price,
+      item_id: foodInfo.value.item_id,
+      name: foodInfo.value.name,
+      packing_fee: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].packing_fee : foodInfo.value.packing_fee,
+      price: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].price : foodInfo.value.price,
       quantity: 0,
-      sku_id: foodInfo.specfoods[0].sku_id,
-      specs: foodInfo.specfoods[0].specs[0] || [""],
+      sku_id: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].sku_id : foodInfo.value.sku_id,
+      specs: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].specs[0] : [""],
       stock: 1e3,
-      num: 1
+      num: 0,
+      image_path: foodInfo.value.image_path
     });
     const reduce = () => {
-      if (num.value >= 1) {
-        num.value--;
-        store.commit("shopcart/reduceCart", foodList);
+      if (foodList.num >= 1) {
+        foodList.num--;
+        if (foodList) {
+          store.commit("shopcart/reduceCart", foodList);
+        }
       }
     };
     const add = () => {
-      num.value++;
+      foodList.num++;
       store.commit("shopcart/addToCart", foodList);
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.unref(num) !== 0
-      }, common_vendor.unref(num) !== 0 ? {
+        a: common_vendor.unref(foodList).num >= 1
+      }, common_vendor.unref(foodList).num >= 1 ? {
         b: common_vendor.o(reduce),
-        c: common_vendor.t(common_vendor.unref(num))
+        c: common_vendor.t(common_vendor.unref(foodList).num)
       } : {}, {
         d: common_vendor.o(add)
       });

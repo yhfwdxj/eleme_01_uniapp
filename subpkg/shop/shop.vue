@@ -23,14 +23,14 @@
     </view>
     <view class="food-review">
       <view class="change-tag">
-        <view class="change-food" @click="changeBox(i=0)">
+        <view class="change-food" @click="changeBox = 0">
           <text>点餐</text>
         </view>
-        <view class="change-review" @click="changeBox(i=1)">
+        <view class="change-review" @click="changeBox = 1">
           <text>评价</text>
         </view>
       </view>
-      <view class="scroll">
+      <view class="scroll" v-if="changeBox===0">
         <view class="">
           <scroll-view scroll-y="true" class="left-scroll" :style="{height:rightScrollHeight+'rpx' }">
             <view class="left" v-for="item,i in res2" :key="i" @click="scrollToRight(i)">
@@ -73,24 +73,61 @@
         </view>
       </view>
       <view class="shop-cart" :style="{width:curWindowWidth + 'rpx'}">
-        <view class="cart-info">
-          <img src="/static/shoppingbag0.png" style=width:80rpx;height:80rpx>
-          <view class="curPrice-fee">
-            <view class="curPrice">
-              ￥0
+        <view class="haveFood" v-if="foodsInfo.length!==0">
+          <view class="nav">
+            <text>已选商品</text>
+          </view>
+          <view class="curFood" v-for="curFood,i in foodsInfo" :key="i">
+            <!-- <img :src="'https://elm.cangdu.org/img/' + foodsInfo.image" style=width:110rpx;height:100rpx> -->
+
+            <view class="curfood-img">
+              <img :src="'https://elm.cangdu.org/img/' + curFood.image_path" style=width:110rpx;height:100rpx>
             </view>
-            <view class="fee">
-              免配送费
+            <view class="curfood-info">
+              <view class="food-name">{{curFood.name}}</view>
+              <view class="price-num">
+                <view class="price">￥{{curFood.price}}</view>
+                <view class="food-num">
+                  <view class="change-num">
+                    <view class="reduce-num" v-if="curFood.num !== 0">
+                      <view class="reduce" @click="reduce(curFood)">
+                        <img src="/static/reduce.png" style=width:40rpx;height:40rpx>
+                      </view>
+                      <view class="num">
+                        <text>{{curFood.num}}</text>
+                      </view>
+                    </view>
+                    <view class="add" @click="add(curFood)">
+                      <img src="/static/plus.png" style=width:40rpx;height:40rpx>
+                    </view>
+                  </view>
+                </view>
+              </view>
             </view>
           </view>
         </view>
-        <view class="go-order">
-          <button>起送</button>
+        <view class="noFood" v-if="res">
+          <view class="cart-info">
+            <img src="/static/shoppingbag0.png" style=width:80rpx;height:80rpx>
+            <view class="curPrice-fee">
+              <view class="curPrice">
+                ￥{{$store.getters['shopcart/total']}}
+              </view>
+              <view class="fee">
+                配送费￥{{res.float_delivery_fee}}
+              </view>
+            </view>
+          </view>
+          <view class="go-order" @click="test">
+            <button>结算</button>
+          </view>
         </view>
+      </view>
+      <view class="review" v-if="changeBox === 1">
+        111
       </view>
     </view>
   </view>
-
 </template>
 
 <script setup>
@@ -101,6 +138,9 @@
     nextTick,
     computed
   } from 'vue'
+  import {
+    useStore
+  } from 'vuex'
   import {
     onLoad,
     onReady
@@ -118,6 +158,10 @@
   let rightScrollHeight = ref('')
   let rightScrollTop2 = ref('')
   const currentInstance = getCurrentInstance()
+  const store = useStore()
+  let curNumber = ref(0)
+  let foodsInfo = computed(() => store.state.shopcart.cart)
+  let changeBox = ref(0)
   onLoad(async (option) => {
     shopId.value = option.shop_id
     res.value = await request({
@@ -156,8 +200,17 @@
       rightScrollTop2.value = rightScrollTop.value[i] - rightScrollTop.value[0]
     }
   }
-  const changeBox = (i) => {
-    console.log(curWindowWidth.value);
+  const test = () => {
+    console.log(foodsInfo.value[0]);
+  }
+  const reduce = (curFood) => {
+    curFood.num--
+    store.commit('shopcart/reduceCart', curFood)
+  }
+  const add = (curFood) => {
+    curFood.num++
+    store.commit('shopcart/addToCart', curFood)
+    console.log(changeBox);
   }
 </script>
 
@@ -265,6 +318,7 @@
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          padding-bottom: 45rpx;
 
           .title {
             font-size: 32rpx;
@@ -325,11 +379,6 @@
                   position: absolute;
                   right: 30rpx;
                   bottom: 15rpx;
-
-                  ::v-deep .uni-numbox__value.data-v-dd94a2a8 {
-                    width: 40rpx;
-                    height: 44rpx;
-                  }
                 }
               }
             }
@@ -341,217 +390,62 @@
         position: fixed;
         bottom: 0;
         left: 5%;
-        height: 130rpx;
-        display: flex;
         background-color: white;
-        justify-content: space-between;
-        align-items: center;
 
-        .cart-info {
-          display: flex;
-          margin-left: 5%;
+        .haveFood {
+          .nav {}
+
+          .curFood {
+            display: flex;
+            height: 120rpx;
+
+            .curfood-info {
+
+              .price-num {
+                display: flex;
+
+                .change-num {
+                  display: flex;
+
+                  .reduce-num {
+                    display: flex;
+
+                    .num {
+                      width: 40rpx;
+                      text-align: center;
+                    }
+                  }
+                }
+
+                .price {
+                  margin-top: 20rpx;
+                }
+
+                .food-num {
+                  position: absolute;
+                  right: 65.7rpx;
+                  margin-top: 20rpx;
+                }
+              }
+            }
+          }
         }
 
-        .go-order {
-          margin-right: 5%;
+        .noFood {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .cart-info {
+            display: flex;
+            margin-left: 5%;
+          }
+
+          .go-order {
+            margin-right: 5%;
+          }
         }
       }
     }
   }
 </style>
-
-<!-- <template>
-  <view>
-    <view class="left_right_column_box">
-      <view class="left_column">
-        <scroll-view :style="{height: viewHeight}" scroll-y="true" :scroll-top="scrollTop">
-          <view v-for="item in titleContenData" :key="item.id"
-            :class="{'left_column_for': true, activity: selectIndex==item.index?true:false}" @click="clickTitle(item)">
-            {{item.title}}
-          </view>
-        </scroll-view>
-      </view>
-
-      <view class="right_column">
-        <scroll-view :style="{height: viewHeight}" scroll-y="true" :scroll-into-view="selectId"
-          scroll-with-animation="true" @scroll="scroll">
-          <view :id="item.id" class="floorType right_title_content_for" v-for="item in titleContenData" :key="item.id">
-            <view class="right_title">{{item.title}}</view>
-            <view v-for="items in item.contents" :key="items.id">{{items.content}}</view>
-          </view>
-        </scroll-view>
-      </view>
-    </view>
-  </view>
-</template>
-<script>
-  // 防抖
-  let timer = undefined;
-
-  export default {
-    data() {
-      return {
-        // 屏幕高度
-        viewHeight: null,
-        // 源数据
-        titleContenData: [],
-        // 设置锚点
-        selectId: 'id1',
-        // 设置高亮
-        selectIndex: 0,
-        // 设置左栏顶部距离
-        scrollTop: 0,
-      }
-    },
-
-    mounted() {
-      let that = this;
-      uni.getSystemInfo({
-        success: function({
-          windowHeight
-        }) {
-          that.viewHeight = windowHeight + 'px';
-        }
-      });
-
-      // 创建数据
-      that.createData();
-
-      // 此处使用$nextTick是非常有必要
-      // 官方建议
-      // 实际测试如果不用会报错
-      that.$nextTick(function() {
-        const query = uni.createSelectorQuery().in(that);
-
-        query.selectAll('.floorType').boundingClientRect(VNodeAll => {
-          VNodeAll.forEach(({
-            top
-          }, i) => {
-            // 获取并存储每个视图到顶部的距离
-            this.titleContenData[i].viewTop = top;
-          });
-        }).exec();
-
-        console.log('titleContenData:', this.titleContenData);
-      });
-    },
-
-    methods: {
-      // 滚动时触发
-      scroll({
-        detail: {
-          scrollTop
-        }
-      }) {
-        let that = this,
-          titleContenData = that.titleContenData;
-
-        // 防抖
-        // timer定义在全局
-        // 如果没有防抖会触发许多次
-        // 对性能不友好
-        if (timer !== undefined) clearTimeout(timer);
-
-        timer = setTimeout(function() {
-          // 当右侧滚动到顶部时强制赋值为0
-          // 因为在滚动时一般获取到的数据是0-10的范围
-          // 小概率会获取到0
-          // 因为原先存储viewTop属性的第一个值就是0
-          scrollTop = scrollTop < 10 ? 0 : scrollTop;
-          let selectIndex = titleContenData.findIndex((item) => item.viewTop >= scrollTop);
-          console.log('scrollTop:', scrollTop);
-          // 设置高亮
-          that.selectIndex = selectIndex;
-          // 此属性联动左侧滚动条
-          // 当右侧滚动时
-          // 左侧也会相应的滚动
-          // 只是滚动的距离不一样
-          that.scrollTop = 5 * that.selectIndex;
-        }, 70);
-      },
-
-      // 标题点击事件
-      clickTitle({
-        id,
-        index
-      }) {
-        console.log(id, index);
-        // 设置锚点
-        this.selectId = id;
-        // 设置高亮
-        this.selectIndex = index;
-      },
-
-      // 生成内容
-      createContent(n) {
-        let content = [];
-        for (let i = 0; i < n; i++) content.push({
-          id: i + 1,
-          content: `内容${i+1}内容`
-        });
-        return content;
-      },
-
-      // 创建数据
-      createData() {
-        // 生成标题
-        for (let i = 0; i < 24; i++) this.titleContenData.push({
-          // 因为需要绑定id作为锚点目标
-          // 所以不能以数字开头
-          id: `id${i+1}`,
-          index: i,
-          title: '标题' + (i + 1),
-          contents: this.createContent(parseInt(Math.random() * 24 + 1, 10))
-        })
-      }
-    },
-  }
-</script>
-
-<style>
-  /* 公共样式 */
-  .left_right_column_box {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  /* 左侧样式 */
-  .left_column {
-    flex: 1;
-  }
-
-  .left_column_for {
-    text-align: center;
-    padding: 10rpx 0;
-  }
-
-  .activity {
-    color: #000fff;
-  }
-
-  /* 右侧样式 */
-  .right_column {
-    flex: 3;
-    margin-left: 36rpx;
-  }
-
-  .right_title_content_for {
-    margin-top: 36rpx;
-  }
-
-  .right_title_content_for:first-child {
-    margin-top: 0;
-  }
-
-  .right_title {
-    font-weight: 700;
-  }
-
-  /* 隐藏scroll-wiew元素的滚动条 */
-  scroll-view ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    background-color: transparent;
-  }
-</style> -->

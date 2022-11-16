@@ -6704,6 +6704,7 @@ exports.f = f;
 exports.getCurrentInstance = getCurrentInstance;
 exports.index = index;
 exports.inject = inject;
+exports.isRef = isRef;
 exports.nextTick = nextTick;
 exports.o = o;
 exports.onLoad = onLoad;
