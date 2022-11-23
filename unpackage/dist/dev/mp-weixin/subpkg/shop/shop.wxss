@@ -23,11 +23,11 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container .food-review .scroll .right-scroll .right .sale-info .name-desc .desc.data-v-2a42858c, .container .shop-container .activities.data-v-2a42858c, .container .shop-container .promotion.data-v-2a42858c, .container .shop-container .shop-info .name-time .time.data-v-2a42858c {
+.container .food-review .review .review-container .rating-info .scores2 .promotion.data-v-2a42858c, .container .food-review .review .review-container .rating-info .scores .promotion.data-v-2a42858c, .container .food-review .scroll .right-scroll .right .sale-info .name-desc .desc.data-v-2a42858c, .container .shop-container .activities.data-v-2a42858c, .container .shop-container .promotion.data-v-2a42858c, .container .shop-container .shop-info .name-time .time.data-v-2a42858c {
   font-size: 27rpx;
   color: #bababa;
 }
-.container .food-review.data-v-2a42858c, .container .shop-container.data-v-2a42858c {
+.container .food-review .review .tag .tag-info.data-v-2a42858c, .container .food-review.data-v-2a42858c, .container .shop-container.data-v-2a42858c {
   border: 2rpx solid white;
   border-radius: 18rpx;
   box-shadow: 0rpx 0rpx 10rpx #b4b4b4;
@@ -182,7 +182,6 @@
 }
 .container .food-review .shop-cart .noFood.data-v-2a42858c {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 .container .food-review .shop-cart .noFood .cart-info.data-v-2a42858c {
@@ -190,5 +189,43 @@
   margin-left: 5%;
 }
 .container .food-review .shop-cart .noFood .go-order.data-v-2a42858c {
-  margin-right: 5%;
+  margin-left: 40%;
+  overflow: hidden;
+}
+.container .food-review .review .review-container .rating-info.data-v-2a42858c {
+  display: flex;
+  justify-content: space-between;
+}
+.container .food-review .review .review-container .rating-info .rating.data-v-2a42858c {
+  margin-top: 7rpx;
+}
+.container .food-review .review .review-container .rating-info .scores.data-v-2a42858c {
+  margin-left: 10rpx;
+}
+.container .food-review .review .review-container .rating-info .scores .promotion.data-v-2a42858c {
+  font-size: 22rpx;
+}
+.container .food-review .review .review-container .rating-info .scores2.data-v-2a42858c {
+  display: flex;
+}
+.container .food-review .review .review-container .rating-info .scores2 .promotion.data-v-2a42858c {
+  margin-right: 20rpx;
+}
+.container .food-review .review .tag.data-v-2a42858c {
+  display: flex;
+  flex-wrap: wrap;
+}
+.container .food-review .review .tag .tag-info.data-v-2a42858c {
+  display: flex;
+  padding: 10rpx;
+  margin: 7rpx;
+}
+.container .food-review .review .user-review.data-v-2a42858c {
+  margin-top: 40rpx;
+}
+.container .food-review .review .user-review .user-container.data-v-2a42858c {
+  display: flex;
+}
+.container .food-review .review .user-review .user-container .user-img.data-v-2a42858c {
+  margin-right: 15rpx;
 }

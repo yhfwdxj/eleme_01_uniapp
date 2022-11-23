@@ -39,7 +39,7 @@
     .have1 {
       display: flex;
       position: relative;
-      top: -50rpx;
+      top: -53rpx;
 
       .have2 {
         width: 150rpx;

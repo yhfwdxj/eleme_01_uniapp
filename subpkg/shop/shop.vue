@@ -21,7 +21,7 @@
         {{res.activities[0].description}}
       </view>
     </view>
-    <view class="food-review">
+    <view class="food-review" v-if="res2">
       <view class="change-tag">
         <view class="change-food" @click="changeBox = 0">
           <text>点餐</text>
@@ -118,13 +118,103 @@
               </view>
             </view>
           </view>
-          <view class="go-order" @click="test">
-            <button>结算</button>
+          <view class="go-order">
+            <button style="background-color: rgb(76, 217, 100);" @click="goOrder"><text
+                style="color:white">结算</text></button>
           </view>
         </view>
       </view>
       <view class="review" v-if="changeBox === 1">
-        111
+        <view class="review-container" v-if="scores">
+          <view class="rating-info">
+            <view class="rating-info">
+              <text class="rating" style="color: rgb(226, 135, 48);font-size: 50rpx;">
+                {{res.rating}}分
+              </text>
+              <view class="scores">
+                <text class="promotion">高于附近{{(scores.compare_rating*100).toFixed(1)}}%的商家</text>
+                <my-star :rating='res.rating'></my-star>
+              </view>
+            </view>
+            <view class="scores2">
+              <view class="foods">
+                <text class="promotion">
+                  味道
+                </text>
+                <view class="promotion">
+                  <text style="color: black;">{{(scores.food_score).toFixed(1)}}</text>
+                </view>
+              </view>
+              <view class="server">
+                <text class="promotion">
+                  包装
+                </text>
+                <view class="promotion">
+                  <text style="color: black;">{{(scores.service_score).toFixed(1)}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="tag">
+          <view class="tag-info" v-for="item,i in tag" :key="i">
+            <view>{{item.name}}</view>&nbsp;
+            <view>{{item.count}}</view>
+          </view>
+        </view>
+        <view class="user-review">
+          <view class="user-container">
+            <view class="user-img">
+              <img src="https://elm.cangdu.org/img/default.jpg" style="width: 80rpx;height: 80rpx;">
+            </view>
+            <view class="user-info">
+              <view class="username">
+                {{rating[0].username}}
+              </view>
+              <view style="height: 40rpx;">
+                <view style="display: flex;height: 52rpx;">
+                  <text>满意度:</text>
+                  <view style="margin-top: 7rpx;">
+                    <my-star></my-star>
+                  </view>
+                </view>
+              </view>
+              <view class="review-img">
+                <img src="https://fuss10.elemecdn.com/d/c8/64033625905f0a15a2d181d53a425jpeg.jpeg"
+                  style="width: 120rpx;height: 120rpx;margin-right: 10rpx;">
+                <img src="https://fuss10.elemecdn.com/0/74/e0e203f613deff4e456c31e4177d1jpeg.jpeg"
+                  style="width: 120rpx;height: 120rpx;">
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="user-review">
+          <view class="user-container">
+            <view class="user-img">
+              <img src="https://elm.cangdu.org/img/default.jpg" style="width: 80rpx;height: 80rpx;">
+            </view>
+            <view class="user-info">
+              <view class="username">
+                {{rating[0].username}}
+              </view>
+              <view style="height: 40rpx;">
+                <view style="display: flex;height: 52rpx;">
+                  <text>满意度:</text>
+                  <view style="margin-top: 7rpx;">
+                    <my-star></my-star>
+                  </view>
+                </view>
+              </view>
+              <view class="review-img">
+                <img src="https://fuss10.elemecdn.com/d/c8/64033625905f0a15a2d181d53a425jpeg.jpeg"
+                  style="width: 120rpx;height: 120rpx;margin-right: 10rpx;">
+                <img src="https://fuss10.elemecdn.com/0/74/e0e203f613deff4e456c31e4177d1jpeg.jpeg"
+                  style="width: 120rpx;height: 120rpx;">
+              </view>
+            </view>
+          </view>
+        </view>
+
       </view>
     </view>
   </view>
@@ -151,6 +241,9 @@
   let res = ref()
   let res2 = ref()
   let res3 = ref()
+  let rating = ref()
+  let scores = ref()
+  let tag = ref()
   let curWindowWidth = ref('')
   let shopId = ref('')
   let leftScrollTop = ref([])
@@ -164,11 +257,22 @@
   let changeBox = ref(0)
   onLoad(async (option) => {
     shopId.value = option.shop_id
+    console.log(shopId.value);
     res.value = await request({
       url: `shopping/restaurant/${option.shop_id}`
     })
+    console.log(res.value);
     res2.value = await request({
       url: `shopping/v2/menu?restaurant_id=${option.shop_id}`
+    })
+    rating.value = await request({
+      url: `ugc/v2/restaurants/${shopId.value}/ratings?limit=10`
+    })
+    scores.value = await request({
+      url: `ugc/v2/restaurants/${shopId.value}/ratings/scores`
+    })
+    tag.value = await request({
+      url: `ugc/v2/restaurants/${shopId.value}/ratings/tags`
     })
     const {
       windowHeight,
@@ -200,9 +304,6 @@
       rightScrollTop2.value = rightScrollTop.value[i] - rightScrollTop.value[0]
     }
   }
-  const test = () => {
-    console.log(foodsInfo.value[0]);
-  }
   const reduce = (curFood) => {
     curFood.num--
     store.commit('shopcart/reduceCart', curFood)
@@ -210,7 +311,11 @@
   const add = (curFood) => {
     curFood.num++
     store.commit('shopcart/addToCart', curFood)
-    console.log(changeBox);
+  }
+  const goOrder = () => {
+    uni.navigateTo({
+      url: `/subpkg/shopOrder/shopOrder?id=${res.value.id}&longitude=${res.value.longitude}&latitude=${res.value.latitude}`
+    })
   }
 </script>
 
@@ -433,7 +538,6 @@
 
         .noFood {
           display: flex;
-          justify-content: space-between;
           align-items: center;
 
           .cart-info {
@@ -442,7 +546,63 @@
           }
 
           .go-order {
-            margin-right: 5%;
+            margin-left: 40%;
+            overflow: hidden;
+          }
+        }
+      }
+
+      .review {
+        .review-container {
+          .rating-info {
+            display: flex;
+            justify-content: space-between;
+
+            .rating {
+              margin-top: 7rpx
+            }
+
+            .scores {
+              margin-left: 10rpx;
+
+              .promotion {
+                @extend %littleText;
+                font-size: 22rpx;
+              }
+            }
+
+            .scores2 {
+              display: flex;
+
+              .promotion {
+                @extend %littleText;
+                margin-right: 20rpx;
+              }
+            }
+          }
+        }
+
+        .tag {
+          display: flex;
+          flex-wrap: wrap;
+
+          .tag-info {
+            @extend %box-shadows;
+            display: flex;
+            padding: 10rpx;
+            margin: 7rpx;
+          }
+        }
+
+        .user-review {
+          margin-top: 40rpx;
+
+          .user-container {
+            display: flex;
+
+            .user-img {
+              margin-right: 15rpx;
+            }
           }
         }
       }

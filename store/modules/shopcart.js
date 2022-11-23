@@ -8,29 +8,21 @@ export default {
   mutations: {
     addToCart(state, payLoad) {
       let findResult = state.cart.find((item) => item.item_id === payLoad.item_id)
-      // if (findResult) {
-      //   findResult.num++
-      // } else {
-      //   state.cart = state.cart.concat(payLoad)
-      // }
-      // console.log(state.cart);    
       if (!findResult) {
         state.cart = state.cart.concat(payLoad)
       }
     },
     reduceCart(state, payLoad) {
       let findResult = state.cart.find((item) => item.item_id === payLoad.item_id)
-      // if (findResult.num > 1) {
-      //   findResult.num--
-      // } else {
-      //   state.cart = state.cart.filter((item) => item.item_id !== findResult.item_id)
-      // }
       if (findResult.num === 0) {
         state.cart = state.cart.filter((item) => item.item_id !== findResult.item_id)
       }
-
-
     }
+  },
+  actions: {
+    // sendOrder({commit},){
+
+    // }
   },
   getters: {
     total(state) {

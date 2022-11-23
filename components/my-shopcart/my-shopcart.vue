@@ -30,7 +30,6 @@
   } from '@dcloudio/uni-app'
   const store = useStore()
   const props = defineProps(['item2', 'shopId'])
-  const emit = defineEmits(['curNum'])
   const foodInfo = computed(() => props.item2)
   const shopId = computed(() => props.shopId)
   let foodList = reactive({

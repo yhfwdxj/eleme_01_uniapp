@@ -48,6 +48,13 @@
           "query": "shop_id=3283",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/shopOrder/shopOrder",
+          "query": "id=3283&longitude=109.017806&latitude=34.24924",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

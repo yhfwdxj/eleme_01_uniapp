@@ -15,6 +15,7 @@ if (!Math) {
   "./subpkg/location/location.js";
   "./subpkg/search/search.js";
   "./subpkg/shop/shop.js";
+  "./subpkg/shopOrder/shopOrder.js";
 }
 const _sfc_main = {
   onLaunch: function() {

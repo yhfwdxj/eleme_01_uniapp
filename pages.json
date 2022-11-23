@@ -26,7 +26,7 @@
     "pages": [{
       "path": "city/city",
       "style": {
-        "navigationBarTitleText": "饿了么"
+        "navigationBarTitleText": "城市定位"
       }
     }, {
       "path": "location/location",
@@ -35,25 +35,28 @@
         "enablePullDownRefresh": false
       }
 
-    }    ,{
-                    "path" : "search/search",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-                ,{
-                    "path" : "shop/shop",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+    }, {
+      "path": "search/search",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "shop/shop",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "shopOrder/shopOrder",
+      "style": {
+        "navigationBarTitleText": "确认订单",
+        "enablePullDownRefresh": false
+      }
+
+    }]
 
   }],
   "tabBar": {

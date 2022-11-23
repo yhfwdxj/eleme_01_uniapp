@@ -35,7 +35,7 @@
 .star .have1 {
   display: flex;
   position: relative;
-  top: -50rpx;
+  top: -53rpx;
 }
 .star .have1 .have2 {
   width: 150rpx;

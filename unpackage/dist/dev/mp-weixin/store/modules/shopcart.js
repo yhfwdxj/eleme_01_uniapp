@@ -20,6 +20,7 @@ var shopcart = {
       }
     }
   },
+  actions: {},
   getters: {
     total(state) {
       let totalPrice = 0;

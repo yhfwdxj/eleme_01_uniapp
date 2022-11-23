@@ -3,8 +3,7 @@ var common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "my-shopcart",
   props: ["item2", "shopId"],
-  emits: ["curNum"],
-  setup(__props, { emit }) {
+  setup(__props) {
     const props = __props;
     const store = common_vendor.useStore();
     const foodInfo = common_vendor.computed$1(() => props.item2);

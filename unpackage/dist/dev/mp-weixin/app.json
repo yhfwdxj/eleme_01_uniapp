@@ -11,7 +11,8 @@
         "city/city",
         "location/location",
         "search/search",
-        "shop/shop"
+        "shop/shop",
+        "shopOrder/shopOrder"
       ]
     }
   ],

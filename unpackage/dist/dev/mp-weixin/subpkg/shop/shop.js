@@ -3,11 +3,13 @@ var common_vendor = require("../../common/vendor.js");
 var utils_request = require("../../utils/request.js");
 if (!Array) {
   const _easycom_my_shopcart2 = common_vendor.resolveComponent("my-shopcart");
-  _easycom_my_shopcart2();
+  const _easycom_my_star2 = common_vendor.resolveComponent("my-star");
+  (_easycom_my_shopcart2 + _easycom_my_star2)();
 }
 const _easycom_my_shopcart = () => "../../components/my-shopcart/my-shopcart.js";
+const _easycom_my_star = () => "../../components/my-star/my-star.js";
 if (!Math) {
-  _easycom_my_shopcart();
+  (_easycom_my_shopcart + _easycom_my_star)();
 }
 const _sfc_main = {
   __name: "shop",
@@ -15,6 +17,9 @@ const _sfc_main = {
     let res = common_vendor.ref();
     let res2 = common_vendor.ref();
     let res3 = common_vendor.ref();
+    let rating = common_vendor.ref();
+    let scores = common_vendor.ref();
+    let tag = common_vendor.ref();
     let curWindowWidth = common_vendor.ref("");
     let shopId = common_vendor.ref("");
     common_vendor.ref([]);
@@ -28,11 +33,22 @@ const _sfc_main = {
     let changeBox = common_vendor.ref(0);
     common_vendor.onLoad(async (option) => {
       shopId.value = option.shop_id;
+      console.log(shopId.value);
       res.value = await utils_request.request({
         url: `shopping/restaurant/${option.shop_id}`
       });
+      console.log(res.value);
       res2.value = await utils_request.request({
         url: `shopping/v2/menu?restaurant_id=${option.shop_id}`
+      });
+      rating.value = await utils_request.request({
+        url: `ugc/v2/restaurants/${shopId.value}/ratings?limit=10`
+      });
+      scores.value = await utils_request.request({
+        url: `ugc/v2/restaurants/${shopId.value}/ratings/scores`
+      });
+      tag.value = await utils_request.request({
+        url: `ugc/v2/restaurants/${shopId.value}/ratings/tags`
       });
       const {
         windowHeight,
@@ -64,9 +80,6 @@ const _sfc_main = {
         rightScrollTop2.value = rightScrollTop.value[i] - rightScrollTop.value[0];
       }
     };
-    const test = () => {
-      console.log(foodsInfo.value[0]);
-    };
     const reduce = (curFood) => {
       curFood.num--;
       store.commit("shopcart/reduceCart", curFood);
@@ -74,7 +87,11 @@ const _sfc_main = {
     const add = (curFood) => {
       curFood.num++;
       store.commit("shopcart/addToCart", curFood);
-      console.log(changeBox);
+    };
+    const goOrder = () => {
+      common_vendor.index.navigateTo({
+        url: `/subpkg/shopOrder/shopOrder?id=${res.value.id}&longitude=${res.value.longitude}&latitude=${res.value.latitude}`
+      });
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -88,19 +105,21 @@ const _sfc_main = {
         g: common_vendor.t(common_vendor.unref(res).promotion_info),
         h: common_vendor.t(common_vendor.unref(res).activities[0].description)
       } : {}, {
-        i: common_vendor.o(($event) => common_vendor.isRef(changeBox) ? changeBox.value = 0 : changeBox = 0),
-        j: common_vendor.o(($event) => common_vendor.isRef(changeBox) ? changeBox.value = 1 : changeBox = 1),
-        k: common_vendor.unref(changeBox) === 0
+        i: common_vendor.unref(res2)
+      }, common_vendor.unref(res2) ? common_vendor.e({
+        j: common_vendor.o(($event) => common_vendor.isRef(changeBox) ? changeBox.value = 0 : changeBox = 0),
+        k: common_vendor.o(($event) => common_vendor.isRef(changeBox) ? changeBox.value = 1 : changeBox = 1),
+        l: common_vendor.unref(changeBox) === 0
       }, common_vendor.unref(changeBox) === 0 ? {
-        l: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
+        m: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: i,
             c: common_vendor.o(($event) => scrollToRight(i), i)
           };
         }),
-        m: common_vendor.unref(rightScrollHeight) + "rpx",
-        n: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
+        n: common_vendor.unref(rightScrollHeight) + "rpx",
+        o: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.f(item.foods, (item2, i2, i1) => {
@@ -122,14 +141,14 @@ const _sfc_main = {
             c: i
           };
         }),
-        o: 140 + "rpx",
         p: 140 + "rpx",
-        q: common_vendor.unref(rightScrollHeight) + "rpx",
-        r: common_vendor.unref(rightScrollTop2)
+        q: 140 + "rpx",
+        r: common_vendor.unref(rightScrollHeight) + "rpx",
+        s: common_vendor.unref(rightScrollTop2)
       } : {}, {
-        s: common_vendor.unref(foodsInfo).length !== 0
+        t: common_vendor.unref(foodsInfo).length !== 0
       }, common_vendor.unref(foodsInfo).length !== 0 ? {
-        t: common_vendor.f(common_vendor.unref(foodsInfo), (curFood, i, i0) => {
+        v: common_vendor.f(common_vendor.unref(foodsInfo), (curFood, i, i0) => {
           return common_vendor.e({
             a: "https://elm.cangdu.org/img/" + curFood.image_path,
             b: common_vendor.t(curFood.name),
@@ -144,15 +163,35 @@ const _sfc_main = {
           });
         })
       } : {}, {
-        v: common_vendor.unref(res)
+        w: common_vendor.unref(res)
       }, common_vendor.unref(res) ? {
-        w: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
-        x: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
-        y: common_vendor.o(test)
+        x: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
+        y: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
+        z: common_vendor.o(goOrder)
       } : {}, {
-        z: common_vendor.unref(curWindowWidth) + "rpx",
-        A: common_vendor.unref(changeBox) === 1
-      }, common_vendor.unref(changeBox) === 1 ? {} : {});
+        A: common_vendor.unref(curWindowWidth) + "rpx",
+        B: common_vendor.unref(changeBox) === 1
+      }, common_vendor.unref(changeBox) === 1 ? common_vendor.e({
+        C: common_vendor.unref(scores)
+      }, common_vendor.unref(scores) ? {
+        D: common_vendor.t(common_vendor.unref(res).rating),
+        E: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
+        F: common_vendor.p({
+          rating: common_vendor.unref(res).rating
+        }),
+        G: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
+        H: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
+      } : {}, {
+        I: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
+          return {
+            a: common_vendor.t(item.name),
+            b: common_vendor.t(item.count),
+            c: i
+          };
+        }),
+        J: common_vendor.t(common_vendor.unref(rating)[0].username),
+        K: common_vendor.t(common_vendor.unref(rating)[0].username)
+      }) : {}) : {});
     };
   }
 };
