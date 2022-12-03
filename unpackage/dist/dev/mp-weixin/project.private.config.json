@@ -55,9 +55,16 @@
           "query": "id=3283&longitude=109.017806&latitude=34.24924",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/user/user",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
   },
-  "libVersion": "2.25.4"
+  "libVersion": "2.27.3"
 }
