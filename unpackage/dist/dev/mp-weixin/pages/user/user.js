@@ -10,15 +10,14 @@ const _sfc_main = {
     };
     const goSearch = () => {
       common_vendor.index.navigateTo({
-        url: "/subpkg/location/location"
+        url: "/subpkg/address/address"
       });
     };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.unref(avatarUrl),
         b: common_vendor.o(chooseavatar),
-        c: common_vendor.unref(avatarUrl),
-        d: common_vendor.o(goSearch)
+        c: common_vendor.o(goSearch)
       };
     };
   }

@@ -24,8 +24,9 @@ const _sfc_main = {
     let res = common_vendor.ref();
     const placeholder = common_vendor.ref("\u8BF7\u8F93\u5165\u5730\u5740");
     const searchContext = (emit) => {
-      if (emit.length >= 1) {
-        res.value = emit;
+      if (emit.data) {
+        res.value = emit.data.data;
+        console.log(res.value);
       } else {
         common_vendor.index.showToast({
           title: "\u65E0\u8FD4\u56DE\u5185\u5BB9",

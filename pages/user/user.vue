@@ -30,7 +30,7 @@
         <button class="login-btn" @click="goSearch">
           <text>收货地址</text>
           <view class="profile">
-            <img :src="avatarUrl" class="profile-img">
+            <text></text>
           </view>
         </button>
       </view>
@@ -49,7 +49,7 @@
   }
   const goSearch = () => {
     uni.navigateTo({
-      url: '/subpkg/location/location'
+      url: '/subpkg/address/address'
     })
   }
 </script>

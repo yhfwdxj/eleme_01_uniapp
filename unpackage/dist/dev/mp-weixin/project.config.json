@@ -10,9 +10,7 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    },
-    "es6": true,
-    "enhance": true
+    }
   },
   "compileType": "miniprogram",
   "libVersion": "",

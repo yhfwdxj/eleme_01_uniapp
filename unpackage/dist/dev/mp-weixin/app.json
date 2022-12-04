@@ -12,7 +12,8 @@
         "location/location",
         "search/search",
         "shop/shop",
-        "shopOrder/shopOrder"
+        "shopOrder/shopOrder",
+        "address/address"
       ]
     }
   ],

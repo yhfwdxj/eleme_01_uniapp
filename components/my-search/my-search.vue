@@ -24,16 +24,23 @@
   onLoad((options) => {
     id = options.city_id
     geohash = options.geohash
+    console.log(geohash);
   })
   const props = defineProps(['placeholder'])
   const emit = defineEmits(['searchContext', 'searchRestaurants'])
   const keyword = ref('')
   let res = ref('')
+  let res2 = ref('')
   const search = async () => {
     if (id && keyword.value) {
-      res = await request({
-        url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
+      // res = await request({
+      //   url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
+      // })
+      res = await uni.request({
+        url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash},1000,1)`,
+        method: 'get'
       })
+
       emit('searchContext', res)
     } else {
       res = await request(({

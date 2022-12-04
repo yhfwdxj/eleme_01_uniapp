@@ -52,8 +52,9 @@
   let res = ref()
   const placeholder = ref('请输入地址')
   const searchContext = (emit) => {
-    if (emit.length >= 1) {
-      res.value = emit
+    if (emit.data) {
+      res.value = emit.data.data
+      console.log(res.value);
     } else {
       uni.showToast({
         title: '无返回内容',

@@ -23,8 +23,9 @@ const _sfc_main = {
     });
     const goToCity = () => {
       common_vendor.index.navigateTo({
-        url: "/subpkg/location/location?city_id=" + curCityList.value.id
+        url: `/subpkg/location/location?city_id=${curCityList.value.id}&geohash=${+curCityList.value.latitude},${curCityList.value.longitude}`
       });
+      console.log();
     };
     const changeCur = (item) => {
       common_vendor.index.navigateTo({

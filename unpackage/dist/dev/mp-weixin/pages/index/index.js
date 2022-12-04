@@ -70,7 +70,7 @@ const _sfc_main = {
       if (curPlace.length) {
         latitude.value = curPlace[0].latitude;
         longitude.value = curPlace[0].longitude;
-        location.value = curPlace[0].name;
+        location.value = curPlace[0].title;
         geohash = curPlace[0].geohash;
         store.dispatch("restaurants/getRestaurants", {
           latitude,

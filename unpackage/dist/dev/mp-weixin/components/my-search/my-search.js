@@ -11,13 +11,16 @@ const _sfc_main = {
     common_vendor.onLoad((options) => {
       id = options.city_id;
       geohash = options.geohash;
+      console.log(geohash);
     });
     const keyword = common_vendor.ref("");
     let res = common_vendor.ref("");
+    common_vendor.ref("");
     const search = async () => {
       if (id && keyword.value) {
-        res = await utils_request.request({
-          url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
+        res = await common_vendor.index.request({
+          url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash},1000,1)`,
+          method: "get"
         });
         emit("searchContext", res);
       } else {

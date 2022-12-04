@@ -61,8 +61,9 @@
   })
   const goToCity = () => {
     uni.navigateTo({
-      url: '/subpkg/location/location?city_id=' + curCityList.value.id
+      url: `/subpkg/location/location?city_id=${curCityList.value.id}&geohash=${ + curCityList.value.latitude},${curCityList.value.longitude}`
     });
+    console.log();
   }
   const changeCur = (item) => {
     uni.navigateTo({
