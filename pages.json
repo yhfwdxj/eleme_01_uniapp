@@ -65,6 +65,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "remark/remark",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 
   }],

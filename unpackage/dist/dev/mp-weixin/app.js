@@ -17,6 +17,7 @@ if (!Math) {
   "./subpkg/shop/shop.js";
   "./subpkg/shopOrder/shopOrder.js";
   "./subpkg/address/address.js";
+  "./subpkg/remark/remark.js";
 }
 const _sfc_main = {
   onLaunch: function() {

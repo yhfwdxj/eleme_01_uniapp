@@ -2,7 +2,8 @@ export default {
   namespaced: true,
   state() {
     return {
-      cart: []
+      cart: [],
+      remark: ''
     }
   },
   mutations: {
@@ -17,12 +18,10 @@ export default {
       if (findResult.num === 0) {
         state.cart = state.cart.filter((item) => item.item_id !== findResult.item_id)
       }
+    },
+    changeRemark(state, payLoad) {
+      state.remark = payLoad
     }
-  },
-  actions: {
-    // sendOrder({commit},){
-
-    // }
   },
   getters: {
     total(state) {

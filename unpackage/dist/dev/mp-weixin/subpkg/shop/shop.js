@@ -33,11 +33,9 @@ const _sfc_main = {
     let changeBox = common_vendor.ref(0);
     common_vendor.onLoad(async (option) => {
       shopId.value = option.shop_id;
-      console.log(shopId.value);
       res.value = await utils_request.request({
         url: `shopping/restaurant/${option.shop_id}`
       });
-      console.log(res.value);
       res2.value = await utils_request.request({
         url: `shopping/v2/menu?restaurant_id=${option.shop_id}`
       });

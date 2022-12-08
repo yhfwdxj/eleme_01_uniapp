@@ -138,7 +138,6 @@
         flex-wrap: wrap;
 
         .hot-city-list {
-
           text-align: center;
           width: 180rpx;
           border: 1px solid rgb(228, 228, 228);
@@ -150,7 +149,6 @@
       margin-top: 40rpx;
       background-color: white;
       display: flex;
-
       flex-wrap: wrap;
 
       .group-text {
@@ -170,7 +168,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-
     }
   }
 </style>

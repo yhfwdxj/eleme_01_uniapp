@@ -257,11 +257,9 @@
   let changeBox = ref(0)
   onLoad(async (option) => {
     shopId.value = option.shop_id
-    console.log(shopId.value);
     res.value = await request({
       url: `shopping/restaurant/${option.shop_id}`
     })
-    console.log(res.value);
     res2.value = await request({
       url: `shopping/v2/menu?restaurant_id=${option.shop_id}`
     })

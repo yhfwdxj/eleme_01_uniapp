@@ -69,6 +69,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/remark/remark",
+          "query": "shop_id=3283",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

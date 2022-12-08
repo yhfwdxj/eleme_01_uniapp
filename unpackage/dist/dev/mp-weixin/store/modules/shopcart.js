@@ -3,7 +3,8 @@ var shopcart = {
   namespaced: true,
   state() {
     return {
-      cart: []
+      cart: [],
+      remark: ""
     };
   },
   mutations: {
@@ -18,9 +19,11 @@ var shopcart = {
       if (findResult.num === 0) {
         state.cart = state.cart.filter((item) => item.item_id !== findResult.item_id);
       }
+    },
+    changeRemark(state, payLoad) {
+      state.remark = payLoad;
     }
   },
-  actions: {},
   getters: {
     total(state) {
       let totalPrice = 0;

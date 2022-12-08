@@ -13,7 +13,8 @@
         "search/search",
         "shop/shop",
         "shopOrder/shopOrder",
-        "address/address"
+        "address/address",
+        "remark/remark"
       ]
     }
   ],
