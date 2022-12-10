@@ -97,6 +97,8 @@
 .order .other .ps {
   display: flex;
   justify-content: space-between;
+  font-size: 30rpx;
+  margin-top: 10rpx;
 }
 .order .other .ps .ps-text {
   color: #c8c8c8;

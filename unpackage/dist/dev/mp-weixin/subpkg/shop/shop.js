@@ -167,28 +167,27 @@ const _sfc_main = {
         y: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
         z: common_vendor.o(goOrder)
       } : {}, {
-        A: common_vendor.unref(curWindowWidth) + "rpx",
-        B: common_vendor.unref(changeBox) === 1
+        A: common_vendor.unref(changeBox) === 1
       }, common_vendor.unref(changeBox) === 1 ? common_vendor.e({
-        C: common_vendor.unref(scores)
+        B: common_vendor.unref(scores)
       }, common_vendor.unref(scores) ? {
-        D: common_vendor.t(common_vendor.unref(res).rating),
-        E: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
-        F: common_vendor.p({
+        C: common_vendor.t(common_vendor.unref(res).rating),
+        D: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
+        E: common_vendor.p({
           rating: common_vendor.unref(res).rating
         }),
-        G: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
-        H: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
+        F: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
+        G: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
       } : {}, {
-        I: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
+        H: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.count),
             c: i
           };
         }),
-        J: common_vendor.t(common_vendor.unref(rating)[0].username),
-        K: common_vendor.t(common_vendor.unref(rating)[0].username)
+        I: common_vendor.t(common_vendor.unref(rating)[0].username),
+        J: common_vendor.t(common_vendor.unref(rating)[0].username)
       }) : {}) : {});
     };
   }

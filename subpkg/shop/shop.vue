@@ -72,7 +72,8 @@
           </scroll-view>
         </view>
       </view>
-      <view class="shop-cart" :style="{width:curWindowWidth + 'rpx'}">
+      <!-- style="{width:curWindowWidth + 'rpx'}" -->
+      <view class="shop-cart">
         <view class="haveFood" v-if="foodsInfo.length!==0">
           <view class="nav">
             <text>已选商品</text>
@@ -119,8 +120,8 @@
             </view>
           </view>
           <view class="go-order">
-            <button style="background-color: rgb(76, 217, 100);" @click="goOrder"><text
-                style="color:white">结算</text></button>
+            <button style="background-color: rgb(76, 217, 100)" @click="goOrder"><text
+                style="color:white;">结算</text></button>
           </view>
         </view>
       </view>
@@ -490,10 +491,12 @@
       }
 
       .shop-cart {
+        width: 90%;
         position: fixed;
         bottom: 0;
         left: 5%;
         background-color: white;
+
 
         .haveFood {
           .nav {}
@@ -503,7 +506,6 @@
             height: 120rpx;
 
             .curfood-info {
-
               .price-num {
                 display: flex;
 
@@ -537,6 +539,8 @@
         .noFood {
           display: flex;
           align-items: center;
+          justify-content: space-between;
+          width: 100%;
 
           .cart-info {
             display: flex;
@@ -544,7 +548,7 @@
           }
 
           .go-order {
-            margin-left: 40%;
+            margin-right: 2%;
             overflow: hidden;
           }
         }

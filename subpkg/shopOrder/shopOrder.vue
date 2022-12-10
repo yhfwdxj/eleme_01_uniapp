@@ -77,6 +77,12 @@
           <text>></text>
         </view>
       </view>
+      <view class="ps" style="margin-top: 20rpx;">
+        <text>发票</text>
+        <view class="ps-text">
+          <text>该店不支持线上开票，请电话联系商户</text>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -231,6 +237,8 @@
       .ps {
         display: flex;
         justify-content: space-between;
+        font-size: 30rpx;
+        margin-top: 10rpx;
 
         .ps-text {
           color: rgb(200, 200, 200);

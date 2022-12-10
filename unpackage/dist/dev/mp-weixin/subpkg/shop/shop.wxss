@@ -150,6 +150,7 @@
   bottom: 15rpx;
 }
 .container .food-review .shop-cart.data-v-2a42858c {
+  width: 90%;
   position: fixed;
   bottom: 0;
   left: 5%;
@@ -183,13 +184,15 @@
 .container .food-review .shop-cart .noFood.data-v-2a42858c {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 .container .food-review .shop-cart .noFood .cart-info.data-v-2a42858c {
   display: flex;
   margin-left: 5%;
 }
 .container .food-review .shop-cart .noFood .go-order.data-v-2a42858c {
-  margin-left: 40%;
+  margin-right: 2%;
   overflow: hidden;
 }
 .container .food-review .review .review-container .rating-info.data-v-2a42858c {
