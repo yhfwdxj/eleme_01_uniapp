@@ -73,6 +73,7 @@
         </view>
       </view>
       <!-- style="{width:curWindowWidth + 'rpx'}" -->
+      <!-- foodsInfo.length!==0 -->
       <view class="shop-cart">
         <view class="haveFood" v-if="foodsInfo.length!==0">
           <view class="nav">
@@ -120,8 +121,7 @@
             </view>
           </view>
           <view class="go-order">
-            <button style="background-color: rgb(76, 217, 100)" @click="goOrder"><text
-                style="color:white;">结算</text></button>
+            <button class="button" @click="goOrder"><text style="color:white;">结算</text></button>
           </view>
         </view>
       </view>
@@ -227,14 +227,16 @@
     reactive,
     getCurrentInstance,
     nextTick,
-    computed
+    computed,
+    watch
   } from 'vue'
   import {
     useStore
   } from 'vuex'
   import {
     onLoad,
-    onReady
+    onReady,
+    onUnload
   } from '@dcloudio/uni-app'
   import {
     request
@@ -256,6 +258,7 @@
   let curNumber = ref(0)
   let foodsInfo = computed(() => store.state.shopcart.cart)
   let changeBox = ref(0)
+  let findRes = ref()
   onLoad(async (option) => {
     shopId.value = option.shop_id
     res.value = await request({
@@ -295,6 +298,15 @@
         rightScrollHeight.value = (res3.value - data.top) * 2 - 30
       }).exec();
     })
+    // if (findRes !== []) {
+    //   foodsInfo.value = findRes
+    // } else {
+    //   foodsInfo = null
+    // }
+    // console.log('findRes', findRes, 'foodsInfo', foodsInfo);
+  })
+  onUnload(() => {
+    store.commit('shopcart/clear', [])
   })
   const scrollToRight = (i) => {
     if (rightScrollTop2.value === rightScrollTop.value[i] - rightScrollTop.value[0]) {
@@ -303,6 +315,12 @@
       rightScrollTop2.value = rightScrollTop.value[i] - rightScrollTop.value[0]
     }
   }
+  // watch(foodsInfo, (newValue, oldValue) => {
+  //   findRes.value = foodsInfo.value.filter((item) => item.shopId === shopId.value)
+  //   console.log('watch', newValue, oldValue);
+  // }, {
+  //   immediate: true
+  // })
   const reduce = (curFood) => {
     curFood.num--
     store.commit('shopcart/reduceCart', curFood)
@@ -550,6 +568,14 @@
           .go-order {
             margin-right: 2%;
             overflow: hidden;
+
+            .button {
+              background-color: rgb(3, 181, 253);
+              width: 200rpx;
+              border-radius: 50rpx;
+              color: white;
+              font-size: 30rpx;
+            }
           }
         }
       }

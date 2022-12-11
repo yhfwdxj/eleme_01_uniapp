@@ -7,10 +7,11 @@ const _sfc_main = {
     const props = __props;
     const store = common_vendor.useStore();
     const foodInfo = common_vendor.computed$1(() => props.item2);
-    common_vendor.computed$1(() => props.shopId);
+    const shopId = common_vendor.computed$1(() => props.shopId);
     let foodList = common_vendor.reactive({
       attrs: [],
       extra: {},
+      shopId: shopId.value,
       item_id: foodInfo.value.item_id,
       name: foodInfo.value.name,
       packing_fee: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].packing_fee : foodInfo.value.packing_fee,

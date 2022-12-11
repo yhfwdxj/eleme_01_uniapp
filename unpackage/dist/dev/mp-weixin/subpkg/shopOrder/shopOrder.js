@@ -16,8 +16,6 @@ const _sfc_main = {
       shop = await utils_request.request({
         url: `shopping/restaurant/${options.id}`
       });
-      console.log(shop);
-      console.log(list);
       let time = new Date();
       time.setMinutes(time.getMinutes() + 30);
       let hours = time.getHours() > 9 ? time.getHours() : "0" + time.getHours();
@@ -28,6 +26,11 @@ const _sfc_main = {
     const goRemark = () => {
       common_vendor.index.navigateTo({
         url: `/subpkg/remark/remark?shop_id=${shopId}`
+      });
+    };
+    const submit = () => {
+      common_vendor.index.switchTab({
+        url: "/pages/order/order"
       });
     };
     return (_ctx, _cache) => {
@@ -55,7 +58,9 @@ const _sfc_main = {
       }, !common_vendor.unref(remark) ? {} : {
         j: common_vendor.t(common_vendor.unref(remark))
       }, {
-        k: common_vendor.o(goRemark)
+        k: common_vendor.o(goRemark),
+        l: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
+        m: common_vendor.o(submit)
       });
     };
   }

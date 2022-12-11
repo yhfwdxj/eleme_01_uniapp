@@ -4,7 +4,8 @@ var shopcart = {
   state() {
     return {
       cart: [],
-      remark: ""
+      remark: "",
+      order: []
     };
   },
   mutations: {
@@ -22,6 +23,11 @@ var shopcart = {
     },
     changeRemark(state, payLoad) {
       state.remark = payLoad;
+    },
+    clear(state, payLoad) {
+      state.order = state.cart;
+      state.cart = payLoad;
+      console.log("order", state.order);
     }
   },
   getters: {

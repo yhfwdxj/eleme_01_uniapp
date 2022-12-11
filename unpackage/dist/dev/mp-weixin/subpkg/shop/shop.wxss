@@ -195,6 +195,13 @@
   margin-right: 2%;
   overflow: hidden;
 }
+.container .food-review .shop-cart .noFood .go-order .button.data-v-2a42858c {
+  background-color: #03b5fd;
+  width: 200rpx;
+  border-radius: 50rpx;
+  color: white;
+  font-size: 30rpx;
+}
 .container .food-review .review .review-container .rating-info.data-v-2a42858c {
   display: flex;
   justify-content: space-between;

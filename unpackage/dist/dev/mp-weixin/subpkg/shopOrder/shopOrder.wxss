@@ -103,3 +103,16 @@
 .order .other .ps .ps-text {
   color: #c8c8c8;
 }
+.send-order {
+  display: flex;
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+}
+.send-order .order-button .button {
+  background-color: #03b5fd;
+  width: 200rpx;
+  border-radius: 50rpx;
+  color: white;
+  font-size: 30rpx;
+}

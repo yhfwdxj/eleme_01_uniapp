@@ -31,6 +31,7 @@ const _sfc_main = {
     common_vendor.ref(0);
     let foodsInfo = common_vendor.computed$1(() => store.state.shopcart.cart);
     let changeBox = common_vendor.ref(0);
+    common_vendor.ref();
     common_vendor.onLoad(async (option) => {
       shopId.value = option.shop_id;
       res.value = await utils_request.request({
@@ -70,6 +71,9 @@ const _sfc_main = {
           rightScrollHeight.value = (res3.value - data.top) * 2 - 30;
         }).exec();
       });
+    });
+    common_vendor.onUnload(() => {
+      store.commit("shopcart/clear", []);
     });
     const scrollToRight = (i) => {
       if (rightScrollTop2.value === rightScrollTop.value[i] - rightScrollTop.value[0]) {

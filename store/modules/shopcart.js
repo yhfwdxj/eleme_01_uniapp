@@ -3,7 +3,8 @@ export default {
   state() {
     return {
       cart: [],
-      remark: ''
+      remark: '',
+      order: []
     }
   },
   mutations: {
@@ -21,6 +22,11 @@ export default {
     },
     changeRemark(state, payLoad) {
       state.remark = payLoad
+    },
+    clear(state, payLoad) {
+      state.order = state.cart
+      state.cart = payLoad
+      console.log('order', state.order);
     }
   },
   getters: {

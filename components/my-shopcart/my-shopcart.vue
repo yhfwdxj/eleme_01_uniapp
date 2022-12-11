@@ -35,6 +35,7 @@
   let foodList = reactive({
     attrs: [],
     extra: {},
+    shopId: shopId.value,
     item_id: foodInfo.value.item_id,
     name: foodInfo.value.name,
     packing_fee: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].packing_fee : foodInfo.value.packing_fee,

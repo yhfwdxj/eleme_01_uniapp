@@ -85,6 +85,15 @@
       </view>
     </view>
   </view>
+  <view class="send-order">
+    <view class="price">
+      <text>合计￥</text>
+      <text style="font-size: 60rpx;">{{$store.getters['shopcart/total']}}</text>
+    </view>
+    <view class="order-button" @click="submit">
+      <button class="button">提交订单</button>
+    </view>
+  </view>
 </template>
 
 <script setup>
@@ -113,8 +122,6 @@
     shop = await request({
       url: `shopping/restaurant/${options.id}`
     })
-    console.log(shop);
-    console.log(list);
     let time = new Date()
     time.setMinutes(time.getMinutes() + 30)
     let hours = time.getHours() > 9 ? time.getHours() : '0' + time.getHours()
@@ -125,6 +132,12 @@
   const goRemark = () => {
     uni.navigateTo({
       url: `/subpkg/remark/remark?shop_id=${shopId}`
+    })
+  }
+  const submit = () => {
+
+    uni.switchTab({
+      url: '/pages/order/order'
     })
   }
 </script>
@@ -243,6 +256,26 @@
         .ps-text {
           color: rgb(200, 200, 200);
         }
+      }
+    }
+  }
+
+  .send-order {
+    display: flex;
+    position: fixed;
+    bottom: 20rpx;
+    right: 20rpx;
+
+    .price {}
+
+    .order-button {
+
+      .button {
+        background-color: rgb(3, 181, 253);
+        width: 200rpx;
+        border-radius: 50rpx;
+        color: white;
+        font-size: 30rpx;
       }
     }
   }
