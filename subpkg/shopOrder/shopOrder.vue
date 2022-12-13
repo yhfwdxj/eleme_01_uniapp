@@ -135,7 +135,6 @@
     })
   }
   const submit = () => {
-
     uni.switchTab({
       url: '/pages/order/order'
     })

@@ -28,6 +28,9 @@ var shopcart = {
       state.order = state.cart;
       state.cart = payLoad;
       console.log("order", state.order);
+    },
+    again(state) {
+      state.cart = state.order;
     }
   },
   getters: {
@@ -37,6 +40,13 @@ var shopcart = {
         totalPrice += item.price * item.num;
       });
       return totalPrice;
+    },
+    total2(state) {
+      let totalPrice2 = 0;
+      state.order.forEach((item) => {
+        totalPrice2 += item.price * item.num;
+      });
+      return totalPrice2;
     }
   }
 };
