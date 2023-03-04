@@ -8,6 +8,11 @@ const _sfc_main = {
     const store = common_vendor.useStore();
     const foodInfo = common_vendor.computed$1(() => props.item2);
     const shopId = common_vendor.computed$1(() => props.shopId);
+    let ballX = common_vendor.ref();
+    let ballY = common_vendor.ref();
+    let ballXAni = common_vendor.ref();
+    let ballYAni = common_vendor.ref();
+    let animationFlag = common_vendor.ref(false);
     let foodList = common_vendor.reactive({
       attrs: [],
       extra: {},
@@ -31,9 +36,55 @@ const _sfc_main = {
         }
       }
     };
-    const add = () => {
+    const add = (e) => {
       foodList.num++;
       store.commit("shopcart/addToCart", foodList);
+      animationFlag.value = true;
+      ballX.value = e.detail.x;
+      ballY.value = e.detail.y;
+      createAnima(ballX.value, ballY.value);
+    };
+    const delaySet = (time) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, time);
+      });
+    };
+    const createAnima = (ballX2, ballY2) => {
+      common_vendor.index.getSystemInfo({
+        success(e) {
+          console.log(e.windowWidth);
+          let axisX = e.windowWidth * 0.3;
+          let axisY = e.windowHeight - 20;
+          let ballFlyX2 = ballFlyX(ballX2, axisX);
+          let ballFlyY2 = ballFlyY(ballY2, axisY);
+          delaySet(100).then(() => {
+            ballXAni.value = ballFlyX2.export();
+            ballYAni.value = ballFlyY2.export();
+            return delaySet(400);
+          }).then(() => {
+            animationFlag.value = false;
+            ballXAni.value = ballFlyX(0, 0, 0).export();
+            ballYAni.value = ballFlyY(0, 0, 0).export();
+            return delaySet(400);
+          });
+        }
+      });
+    };
+    const ballFlyX = (ballStartX, ballStopX, time) => {
+      let animation = common_vendor.index.createAnimation({
+        duration: time || 400,
+        timingFunction: "linear"
+      });
+      return animation.translateX(ballStopX - ballStartX).step();
+    };
+    const ballFlyY = (ballStartY, ballStopY, time) => {
+      let animation = common_vendor.index.createAnimation({
+        duration: time || 400,
+        timingFunction: "ease-in"
+      });
+      return animation.translateY(ballStopY - ballStartY).step();
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -42,8 +93,12 @@ const _sfc_main = {
         b: common_vendor.o(reduce),
         c: common_vendor.t(common_vendor.unref(foodList).num)
       } : {}, {
-        d: common_vendor.o(add)
-      });
+        d: common_vendor.o(add),
+        e: common_vendor.unref(animationFlag)
+      }, common_vendor.unref(animationFlag) ? {
+        f: common_vendor.unref(ballXAni),
+        g: common_vendor.unref(ballYAni)
+      } : {});
     };
   }
 };

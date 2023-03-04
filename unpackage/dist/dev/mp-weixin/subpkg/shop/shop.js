@@ -26,12 +26,19 @@ const _sfc_main = {
     let rightScrollTop = common_vendor.ref([]);
     let rightScrollHeight = common_vendor.ref("");
     let rightScrollTop2 = common_vendor.ref("");
+    let active = common_vendor.ref(0);
     const currentInstance = common_vendor.getCurrentInstance();
     const store = common_vendor.useStore();
+    let hasFood = common_vendor.ref(false);
     common_vendor.ref(0);
     let foodsInfo = common_vendor.computed$1(() => store.state.shopcart.cart);
     let changeBox = common_vendor.ref(0);
     common_vendor.ref();
+    let timer = void 0;
+    let leftIntoView = common_vendor.ref("left0");
+    let rightIntoView = common_vendor.ref("right0");
+    common_vendor.reactive({});
+    let isclick = false;
     common_vendor.onLoad(async (option) => {
       shopId.value = option.shop_id;
       res.value = await utils_request.request({
@@ -75,18 +82,38 @@ const _sfc_main = {
     common_vendor.onUnload(() => {
       store.commit("shopcart/clear", []);
     });
-    const scrollToRight = (i) => {
-      if (rightScrollTop2.value === rightScrollTop.value[i] - rightScrollTop.value[0]) {
-        rightScrollTop2.value += 0.1;
-      } else {
-        rightScrollTop2.value = rightScrollTop.value[i] - rightScrollTop.value[0];
+    const scrollToRight = (item, i) => {
+      isclick = true;
+      rightIntoView.value = "right" + item.id;
+      active.value = i;
+      setTimeout(() => {
+        isclick = false;
+      }, 500);
+    };
+    const rightscr = (e) => {
+      if (!isclick) {
+        if (timer !== void 0)
+          clearTimeout(timer);
+        timer = setTimeout(function() {
+          for (let i = rightScrollTop.value.length - 1; i >= 0; i--) {
+            if (e.detail.scrollTop >= rightScrollTop.value[i] - rightScrollTop.value[0] - 2) {
+              active.value = i;
+              break;
+            }
+          }
+        }, 70);
       }
+    };
+    const showCart = () => {
+      if (foodsInfo.value.length !== 0)
+        hasFood.value = !hasFood.value;
     };
     const reduce = (curFood) => {
       curFood.num--;
       store.commit("shopcart/reduceCart", curFood);
     };
     const add = (curFood) => {
+      hasFood.value = true;
       curFood.num++;
       store.commit("shopcart/addToCart", curFood);
     };
@@ -117,14 +144,19 @@ const _sfc_main = {
           return {
             a: common_vendor.t(item.name),
             b: i,
-            c: common_vendor.o(($event) => scrollToRight(i), i)
+            c: common_vendor.o(($event) => scrollToRight(item, i), i),
+            d: i,
+            e: "left" + i,
+            f: common_vendor.n(common_vendor.unref(active) === i ? "active" : "")
           };
         }),
         n: common_vendor.unref(rightScrollHeight) + "rpx",
-        o: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
+        o: common_vendor.unref(leftIntoView),
+        p: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
-            b: common_vendor.f(item.foods, (item2, i2, i1) => {
+            b: "right" + item.id,
+            c: common_vendor.f(item.foods, (item2, i2, i1) => {
               return {
                 a: "https://elm.cangdu.org/img/" + item2.image_path,
                 b: common_vendor.t(item2.name),
@@ -140,17 +172,19 @@ const _sfc_main = {
                 i: i2
               };
             }),
-            c: i
+            d: i
           };
         }),
-        p: 140 + "rpx",
         q: 140 + "rpx",
-        r: common_vendor.unref(rightScrollHeight) + "rpx",
-        s: common_vendor.unref(rightScrollTop2)
+        r: 140 + "rpx",
+        s: common_vendor.unref(rightScrollHeight) + "rpx",
+        t: common_vendor.unref(rightScrollTop2),
+        v: common_vendor.o(rightscr),
+        w: common_vendor.unref(rightIntoView)
       } : {}, {
-        t: common_vendor.unref(foodsInfo).length !== 0
-      }, common_vendor.unref(foodsInfo).length !== 0 ? {
-        v: common_vendor.f(common_vendor.unref(foodsInfo), (curFood, i, i0) => {
+        x: common_vendor.unref(foodsInfo).length !== 0 && common_vendor.unref(hasFood)
+      }, common_vendor.unref(foodsInfo).length !== 0 && common_vendor.unref(hasFood) ? {
+        y: common_vendor.f(common_vendor.unref(foodsInfo), (curFood, i, i0) => {
           return common_vendor.e({
             a: "https://elm.cangdu.org/img/" + curFood.image_path,
             b: common_vendor.t(curFood.name),
@@ -165,33 +199,36 @@ const _sfc_main = {
           });
         })
       } : {}, {
-        w: common_vendor.unref(res)
-      }, common_vendor.unref(res) ? {
-        x: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
-        y: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
-        z: common_vendor.o(goOrder)
-      } : {}, {
-        A: common_vendor.unref(changeBox) === 1
+        z: common_vendor.unref(res)
+      }, common_vendor.unref(res) ? common_vendor.e({
+        A: common_vendor.unref(foodsInfo).length === 0
+      }, common_vendor.unref(foodsInfo).length === 0 ? {} : {}, {
+        B: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
+        C: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
+        D: common_vendor.o(showCart),
+        E: common_vendor.o(goOrder)
+      }) : {}, {
+        F: common_vendor.unref(changeBox) === 1
       }, common_vendor.unref(changeBox) === 1 ? common_vendor.e({
-        B: common_vendor.unref(scores)
+        G: common_vendor.unref(scores)
       }, common_vendor.unref(scores) ? {
-        C: common_vendor.t(common_vendor.unref(res).rating),
-        D: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
-        E: common_vendor.p({
+        H: common_vendor.t(common_vendor.unref(res).rating),
+        I: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
+        J: common_vendor.p({
           rating: common_vendor.unref(res).rating
         }),
-        F: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
-        G: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
+        K: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
+        L: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
       } : {}, {
-        H: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
+        M: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.count),
             c: i
           };
         }),
-        I: common_vendor.t(common_vendor.unref(rating)[0].username),
-        J: common_vendor.t(common_vendor.unref(rating)[0].username)
+        N: common_vendor.t(common_vendor.unref(rating)[0].username),
+        O: common_vendor.t(common_vendor.unref(rating)[0].username)
       }) : {}) : {});
     };
   }

@@ -32,6 +32,25 @@
   border-radius: 18rpx;
   box-shadow: 0rpx 0rpx 10rpx #b4b4b4;
 }
+.img-bgc.data-v-2a42858c {
+  color: blue;
+}
+.active.data-v-2a42858c {
+  background-color: #FFFFFF;
+  position: relative;
+  display: block;
+}
+.active.data-v-2a42858c::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 3px;
+  height: 30px;
+  background-color: #C00000;
+  top: 50%;
+  right: 7%;
+  transform: translate(0%, -50%);
+}
 .container.data-v-2a42858c {
   width: 90%;
   margin: 30rpx auto;
@@ -97,6 +116,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-size: 27rpx;
 }
 .container .food-review .scroll .right-scroll.data-v-2a42858c {
   overflow: hidden;

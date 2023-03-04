@@ -32,17 +32,20 @@
       </view>
       <view class="scroll" v-if="changeBox===0">
         <view class="">
-          <scroll-view scroll-y="true" class="left-scroll" :style="{height:rightScrollHeight+'rpx' }">
-            <view class="left" v-for="item,i in res2" :key="i" @click="scrollToRight(i)">
-              <text>{{item.name}}</text>
+          <scroll-view scroll-y="true" class="left-scroll" :style="{height:rightScrollHeight+'rpx' }"
+            :scroll-into-view="leftIntoView">
+            <view class="left" v-for="item,i in res2" :key="i" @click="scrollToRight(item,i)" :data-index="i"
+              :id="'left'+i" :class="active===i?'active':''">
+              {{item.name}}
             </view>
           </scroll-view>
         </view>
         <view class="">
           <scroll-view scroll-y="true" class="right-scroll" :style="{height:rightScrollHeight +'rpx' }"
-            :scroll-top="rightScrollTop2" scroll-with-animation="true">
+            :scroll-top="rightScrollTop2" scroll-with-animation="true" @scroll="rightscr"
+            :scroll-into-view="rightIntoView">
             <block v-for="item,i in res2" :key="i">
-              <view class="title">
+              <view class="title" :id="'right'+item.id">
                 {{item.name}}
               </view>
               <view class="right" v-for="item2,i in item.foods" :key="i">
@@ -75,13 +78,12 @@
       <!-- style="{width:curWindowWidth + 'rpx'}" -->
       <!-- foodsInfo.length!==0 -->
       <view class="shop-cart">
-        <view class="haveFood" v-if="foodsInfo.length!==0">
+        <view class="haveFood" v-if="foodsInfo.length!==0 &&hasFood">
           <view class="nav">
             <text>已选商品</text>
           </view>
           <view class="curFood" v-for="curFood,i in foodsInfo" :key="i">
             <!-- <img :src="'https://elm.cangdu.org/img/' + foodsInfo.image" style=width:110rpx;height:100rpx> -->
-
             <view class="curfood-img">
               <img :src="'https://elm.cangdu.org/img/' + curFood.image_path" style=width:110rpx;height:100rpx>
             </view>
@@ -109,8 +111,9 @@
           </view>
         </view>
         <view class="noFood" v-if="res">
-          <view class="cart-info">
-            <img src="/static/shoppingbag0.png" style=width:80rpx;height:80rpx>
+          <view class="cart-info" @click="showCart">
+            <img src="/static/shoppingbag0.png" style="width:80rpx;height:80rpx" v-if="foodsInfo.length === 0">
+            <img src="/static/shoppingbag1.png" style="width:80rpx;height:80rpx" v-else>
             <view class="curPrice-fee">
               <view class="curPrice">
                 ￥{{$store.getters['shopcart/total']}}
@@ -253,12 +256,19 @@
   let rightScrollTop = ref([])
   let rightScrollHeight = ref('')
   let rightScrollTop2 = ref('')
+  let active = ref(0)
   const currentInstance = getCurrentInstance()
   const store = useStore()
+  let hasFood = ref(false)
   let curNumber = ref(0)
   let foodsInfo = computed(() => store.state.shopcart.cart)
   let changeBox = ref(0)
   let findRes = ref()
+  let timer = undefined;
+  let leftIntoView = ref('left0')
+  let rightIntoView = ref('right0')
+  let animationData = reactive({})
+  let isclick = false
   onLoad(async (option) => {
     shopId.value = option.shop_id
     res.value = await request({
@@ -297,41 +307,54 @@
       }, data => {
         rightScrollHeight.value = (res3.value - data.top) * 2 - 30
       }).exec();
+
     })
-    // if (findRes !== []) {
-    //   foodsInfo.value = findRes
-    // } else {
-    //   foodsInfo = null
-    // }
-    // console.log('findRes', findRes, 'foodsInfo', foodsInfo);
   })
   onUnload(() => {
     store.commit('shopcart/clear', [])
   })
-  const scrollToRight = (i) => {
-    if (rightScrollTop2.value === rightScrollTop.value[i] - rightScrollTop.value[0]) {
-      rightScrollTop2.value += 0.1
-    } else {
-      rightScrollTop2.value = rightScrollTop.value[i] - rightScrollTop.value[0]
+  const scrollToRight = (item, i) => {
+    isclick = true
+    rightIntoView.value = 'right' + item.id
+    active.value = i
+    setTimeout(() => {
+      isclick = false
+    }, 500)
+  }
+  const rightscr = (e) => {
+    if (!isclick) {
+      if (timer !== undefined) clearTimeout(timer);
+      timer = setTimeout(function() {
+        for (let i = rightScrollTop.value.length - 1; i >= 0; i--) {
+          if (e.detail.scrollTop >= rightScrollTop.value[i] - rightScrollTop.value[0] - 2) {
+            active.value = i
+            break
+          }
+        }
+      }, 70);
     }
   }
-  // watch(foodsInfo, (newValue, oldValue) => {
-  //   findRes.value = foodsInfo.value.filter((item) => item.shopId === shopId.value)
-  //   console.log('watch', newValue, oldValue);
-  // }, {
-  //   immediate: true
-  // })
+  const showCart = () => {
+    if (foodsInfo.value.length !== 0) hasFood.value = !hasFood.value
+  }
   const reduce = (curFood) => {
     curFood.num--
     store.commit('shopcart/reduceCart', curFood)
   }
   const add = (curFood) => {
+    hasFood.value = true
     curFood.num++
     store.commit('shopcart/addToCart', curFood)
   }
   const goOrder = () => {
     uni.navigateTo({
       url: `/subpkg/shopOrder/shopOrder?id=${res.value.id}&longitude=${res.value.longitude}&latitude=${res.value.latitude}`
+    })
+  }
+  const animation = () => {
+    let animation = uni.createAnimation({
+      duration: 1000,
+      timingFunction: 'linear',
     })
   }
 </script>
@@ -346,6 +369,28 @@
     border: 2rpx solid white;
     border-radius: 18rpx;
     box-shadow: 0rpx 0rpx 10rpx rgb(180, 180, 180);
+  }
+
+  .img-bgc {
+    color: blue;
+  }
+
+  .active {
+    background-color: #FFFFFF;
+    position: relative;
+    display: block;
+
+    &::before {
+      position: absolute;
+      content: '';
+      display: block;
+      width: 3px;
+      height: 30px;
+      background-color: #C00000;
+      top: 50%;
+      right: 7%;
+      transform: translate(0%, -50%);
+    }
   }
 
   .container {
@@ -433,6 +478,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            font-size: 27rpx;
           }
         }
 

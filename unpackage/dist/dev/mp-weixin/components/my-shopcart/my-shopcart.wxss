@@ -25,6 +25,7 @@
 /* 文章场景相关 */
 .change-num {
   display: flex;
+  position: relative;
 }
 .change-num .reduce-num {
   display: flex;
@@ -32,4 +33,7 @@
 .change-num .reduce-num .num {
   width: 40rpx;
   text-align: center;
+}
+.change-num .ball-animation {
+  position: absolute;
 }

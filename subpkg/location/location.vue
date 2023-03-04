@@ -54,7 +54,6 @@
   const searchContext = (emit) => {
     if (emit.data) {
       res.value = emit.data.data
-      console.log(res.value);
     } else {
       uni.showToast({
         title: '无返回内容',

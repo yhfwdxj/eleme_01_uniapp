@@ -26,7 +26,6 @@ const _sfc_main = {
     const searchContext = (emit) => {
       if (emit.data) {
         res.value = emit.data.data;
-        console.log(res.value);
       } else {
         common_vendor.index.showToast({
           title: "\u65E0\u8FD4\u56DE\u5185\u5BB9",
