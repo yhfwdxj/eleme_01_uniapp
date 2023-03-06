@@ -5,9 +5,10 @@ const request = (options) => {
   return new Promise((resolve, reject) => {
     common_vendor.index.request({
       url: baseUrl + options.url,
-      method: "get",
+      method: options.method || "get",
       data: options.data || {},
       header: options.header || {},
+      withCredentials: true,
       success: (res) => {
         return resolve(res.data);
       },

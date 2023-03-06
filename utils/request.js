@@ -5,9 +5,10 @@ export const request = (options) => {
   return new Promise((resolve, reject) => {
     uni.request({
       url: baseUrl + options.url,
-      method: 'get' || options.method,
+      method: options.method || 'get',
       data: options.data || {},
       header: options.header || {},
+      withCredentials: true,
       success: (res) => {
         return resolve(res.data)
       },

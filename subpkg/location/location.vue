@@ -89,9 +89,9 @@
       curplace.value.push(item)
       uni.setStorageSync('curplace', JSON.stringify(curplace.value))
     }
-    uni.switchTab({
-      url: "/pages/index/index"
-    })
+    // uni.switchTab({
+    //   url: "/pages/index/index"
+    // })
   }
   const goIndex = (item) => {
     let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')

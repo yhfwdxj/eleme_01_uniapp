@@ -1,103 +1,150 @@
 <template>
   <view class="user-container">
-    <text style="margin: 3%;">用户信息:</text>
-    <view class="user" style="margin-top: 3%;">
-      <view class="user-img">
-        <button class="login-btn" open-type="chooseAvatar" @chooseavatar="chooseavatar">
-          <text>头像</text>
-          <view class="profile">
-            <img :src="avatarUrl" class="profile-img">
-          </view>
-        </button>
+    <view class="userInfo" @click="goLogin">
+      <view class="avatar">
+        <img src="../../static/头像-01.png" style="width: 100rpx; height: 100rpx;">
       </view>
-      <view class="user-img">
-        <button class="login-btn">
-          <text>昵称</text>
-          <view class="input-name">
-            <input type="nickname" placeholder="请输入昵称">
-          </view>
-        </button>
+      <view class="login">
+        <text style="font-size: 38rpx;">登录/注册</text>
       </view>
-      <view class="user-img">
-        <button class="login-btn">
-          <text>个人简介</text>
-          <view class="profile">
-            <input type="text">
-          </view>
-        </button>
+    </view>
+    <view class="money">
+      <view style="text-align: center;">
+        <view class="count">
+          <text style="color: orange;font-size: 60rpx;">0.00</text>
+          <text>元</text>
+        </view>
+        <view class="">
+          <text>我的钱包</text>
+        </view>
       </view>
-      <view class="user-img">
-        <button class="login-btn" @click="goSearch">
-          <text>收货地址</text>
-          <view class="profile">
-            <text></text>
-          </view>
-        </button>
+      <view style="text-align: center;">
+        <view class="count">
+          <text style="color: skyblue;font-size: 60rpx;">0</text>
+          <text>个</text>
+        </view>
+        <view class="">
+          <text>我的卡券</text>
+        </view>
+      </view>
+      <view style="text-align: center;">
+        <view class="count">
+          <text style="color: red;font-size: 60rpx;">0</text>
+          <text>个</text>
+        </view>
+        <view class="">
+          <text>我的红包</text>
+        </view>
+      </view>
+    </view>
+    <view class="other-info">
+      <view class="go-order">
+        <view class="other-common">
+          <img src="../../static/_订单.png" class="img-common">
+          <text class="text-common">我的订单</text>
+        </view>
+        <view>></view>
+      </view>
+      <view class="none">
+        <view class="other-common">
+          <img src="../../static/24gl-bag(1).png" class="img-common">
+          <text class="text-common">积分商城</text>
+        </view>
+        <view>></view>
+      </view>
+      <view class="none">
+        <view class="other-common">
+          <img src="../../static/会员卡.png" class="img-common">
+          <text class="text-common">饿了么会员卡</text>
+        </view>
+        <view>></view>
       </view>
     </view>
   </view>
+
 </template>
 
 <script setup>
   import {
     ref
   } from 'vue'
-  let avatarUrl = ref('')
-  const chooseavatar = (e) => {
-    avatarUrl.value = e.detail.avatarUrl
-    console.log(avatarUrl);
-  }
-  const goSearch = () => {
+
+  const goLogin = () => {
     uni.navigateTo({
-      url: '/subpkg/address/address'
+      url: '/subpkg/login/login'
     })
   }
 </script>
 <style lang="scss">
-  button::after {
-    border: none;
+  %moneyfontsize {
+    font-size: 60rpx;
   }
 
   .user-container {
+    margin: auto;
+    background-color: rgb(238, 238, 238);
 
-    .user {
-      .user-img {
+    .userInfo {
+      display: flex;
+      align-items: center;
+      height: 250rpx;
+      background-color: white;
 
-        .login-btn {
-          position: relative;
-          width: 95%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          height: 110rpx;
-          font-size: 30rpx;
-          background-color: #fff;
-          border-top: 2rpx solid rgb(200, 200, 200);
-
-          .input-name {
-            position: absolute;
-            right: 5%;
-            text-align: right;
-          }
-
-          .profile {
-            display: flex;
-            align-items: center;
-
-            &::after {
-              content: '>';
-            }
-
-            .profile-img {
-              width: 80rpx;
-              height: 60rpx;
-              margin-right: 10rpx;
-            }
-          }
-
-
-        }
+      &::after {
+        content: '>';
       }
+
+      .avatar {
+        margin-left: 5%;
+      }
+
+      .login {
+        width: 75%;
+      }
+    }
+
+    .money {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10rpx;
+      min-height: 200rpx;
+      align-items: center;
+      background-color: white;
+      margin: 30rpx 0;
+
+      .count {}
+    }
+
+    .other-info {
+      margin: auto;
+      background-color: white;
+
+      .go-order {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 2%;
+      }
+
+      .none {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 2%;
+      }
+    }
+  }
+
+  .other-common {
+    display: flex;
+    margin: 20rpx 0;
+    align-items: center;
+
+    .text-common {
+      font-size: 36rpx;
+    }
+
+    .img-common {
+      width: 46rpx;
+      height: 46rpx;
     }
   }
 </style>

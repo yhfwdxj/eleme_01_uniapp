@@ -18,6 +18,7 @@ if (!Math) {
   "./subpkg/shopOrder/shopOrder.js";
   "./subpkg/address/address.js";
   "./subpkg/remark/remark.js";
+  "./subpkg/login/login.js";
 }
 const _sfc_main = {
   onLaunch: function() {

@@ -74,6 +74,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "login/login",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 
   }],

@@ -23,34 +23,57 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-button::after {
-  border: none;
+.user-container {
+  margin: auto;
+  background-color: #eeeeee;
 }
-.user-container .user .user-img .login-btn {
-  position: relative;
-  width: 95%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 110rpx;
-  font-size: 30rpx;
-  background-color: #fff;
-  border-top: 2rpx solid #c8c8c8;
-}
-.user-container .user .user-img .login-btn .input-name {
-  position: absolute;
-  right: 5%;
-  text-align: right;
-}
-.user-container .user .user-img .login-btn .profile {
+.user-container .userInfo {
   display: flex;
   align-items: center;
+  height: 250rpx;
+  background-color: white;
 }
-.user-container .user .user-img .login-btn .profile::after {
+.user-container .userInfo::after {
   content: ">";
 }
-.user-container .user .user-img .login-btn .profile .profile-img {
-  width: 80rpx;
-  height: 60rpx;
-  margin-right: 10rpx;
+.user-container .userInfo .avatar {
+  margin-left: 5%;
+}
+.user-container .userInfo .login {
+  width: 75%;
+}
+.user-container .money {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10rpx;
+  min-height: 200rpx;
+  align-items: center;
+  background-color: white;
+  margin: 30rpx 0;
+}
+.user-container .other-info {
+  margin: auto;
+  background-color: white;
+}
+.user-container .other-info .go-order {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2%;
+}
+.user-container .other-info .none {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2%;
+}
+.other-common {
+  display: flex;
+  margin: 20rpx 0;
+  align-items: center;
+}
+.other-common .text-common {
+  font-size: 36rpx;
+}
+.other-common .img-common {
+  width: 46rpx;
+  height: 46rpx;
 }

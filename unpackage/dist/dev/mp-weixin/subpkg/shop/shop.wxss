@@ -106,12 +106,10 @@
 }
 .container .food-review .scroll.data-v-2a42858c {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
-.container .food-review .scroll .left-scroll.data-v-2a42858c {
-  width: 100rpx;
-}
-.container .food-review .scroll .left-scroll .left.data-v-2a42858c {
+.container .food-review .scroll .left-scroll-container .left-scroll .left.data-v-2a42858c {
+  text-align: center;
   line-height: 120rpx;
   overflow: hidden;
   white-space: nowrap;
@@ -142,6 +140,7 @@
 }
 .container .food-review .scroll .right-scroll .right .sale-info.data-v-2a42858c {
   margin-left: 10rpx;
+  max-width: 45%;
 }
 .container .food-review .scroll .right-scroll .right .sale-info .name-desc.data-v-2a42858c {
   white-space: nowrap;
@@ -152,7 +151,7 @@
   font-size: 30rpx;
 }
 .container .food-review .scroll .right-scroll .right .sale-info .sale.data-v-2a42858c {
-  font-size: 25rpx;
+  font-size: 23rpx;
   color: #343434;
 }
 .container .food-review .scroll .right-scroll .right .sale-info .price-cart.data-v-2a42858c {

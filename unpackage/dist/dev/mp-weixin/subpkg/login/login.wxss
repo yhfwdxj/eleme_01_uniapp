@@ -23,18 +23,30 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.change-num {
+.login-container .container {
+  border-bottom: 2rpx solid #f1f1f1;
   display: flex;
-  position: relative;
+  margin: 30rpx;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100rpx;
 }
-.change-num .reduce-num {
+.login-container .container .code {
   display: flex;
+  align-items: center;
 }
-.change-num .reduce-num .num {
-  width: 40rpx;
-  text-align: center;
+.login-container .container .code .change {
+  margin-left: 20rpx;
+  color: #3060fc;
 }
-.change-num .ball-animation {
-  position: absolute;
-  z-index: 100;
+.tips {
+  margin: 50rpx 30rpx;
+}
+.tips .tipss {
+  margin-bottom: 30rpx;
+  color: red;
+}
+.button {
+  width: 90%;
+  margin: auto;
 }

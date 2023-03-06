@@ -39,6 +39,8 @@ const _sfc_main = {
     let rightIntoView = common_vendor.ref("right0");
     common_vendor.reactive({});
     let isclick = false;
+    let rightScrollWidth = common_vendor.ref();
+    let leftScrollWidth = common_vendor.ref();
     common_vendor.onLoad(async (option) => {
       shopId.value = option.shop_id;
       res.value = await utils_request.request({
@@ -62,6 +64,8 @@ const _sfc_main = {
       } = common_vendor.index.getSystemInfoSync();
       res3.value = windowHeight;
       curWindowWidth.value = windowWidth * 1.8;
+      rightScrollWidth.value = curWindowWidth.value * 0.75;
+      leftScrollWidth.value = curWindowWidth.value * 0.2;
       common_vendor.nextTick(() => {
         const query = common_vendor.index.createSelectorQuery().in(currentInstance.proxy);
         query.selectAll(".title").boundingClientRect((data) => {
@@ -151,8 +155,9 @@ const _sfc_main = {
           };
         }),
         n: common_vendor.unref(rightScrollHeight) + "rpx",
-        o: common_vendor.unref(leftIntoView),
-        p: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
+        o: common_vendor.unref(leftScrollWidth) + "rpx",
+        p: common_vendor.unref(leftIntoView),
+        q: common_vendor.f(common_vendor.unref(res2), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: "right" + item.id,
@@ -175,16 +180,17 @@ const _sfc_main = {
             d: i
           };
         }),
-        q: 140 + "rpx",
         r: 140 + "rpx",
-        s: common_vendor.unref(rightScrollHeight) + "rpx",
-        t: common_vendor.unref(rightScrollTop2),
-        v: common_vendor.o(rightscr),
-        w: common_vendor.unref(rightIntoView)
+        s: 140 + "rpx",
+        t: common_vendor.unref(rightScrollHeight) + "rpx",
+        v: common_vendor.unref(rightScrollWidth) + "rpx",
+        w: common_vendor.unref(rightScrollTop2),
+        x: common_vendor.o(rightscr),
+        y: common_vendor.unref(rightIntoView)
       } : {}, {
-        x: common_vendor.unref(foodsInfo).length !== 0 && common_vendor.unref(hasFood)
+        z: common_vendor.unref(foodsInfo).length !== 0 && common_vendor.unref(hasFood)
       }, common_vendor.unref(foodsInfo).length !== 0 && common_vendor.unref(hasFood) ? {
-        y: common_vendor.f(common_vendor.unref(foodsInfo), (curFood, i, i0) => {
+        A: common_vendor.f(common_vendor.unref(foodsInfo), (curFood, i, i0) => {
           return common_vendor.e({
             a: "https://elm.cangdu.org/img/" + curFood.image_path,
             b: common_vendor.t(curFood.name),
@@ -199,36 +205,36 @@ const _sfc_main = {
           });
         })
       } : {}, {
-        z: common_vendor.unref(res)
+        B: common_vendor.unref(res)
       }, common_vendor.unref(res) ? common_vendor.e({
-        A: common_vendor.unref(foodsInfo).length === 0
+        C: common_vendor.unref(foodsInfo).length === 0
       }, common_vendor.unref(foodsInfo).length === 0 ? {} : {}, {
-        B: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
-        C: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
-        D: common_vendor.o(showCart),
-        E: common_vendor.o(goOrder)
+        D: common_vendor.t(_ctx.$store.getters["shopcart/total"]),
+        E: common_vendor.t(common_vendor.unref(res).float_delivery_fee),
+        F: common_vendor.o(showCart),
+        G: common_vendor.o(goOrder)
       }) : {}, {
-        F: common_vendor.unref(changeBox) === 1
+        H: common_vendor.unref(changeBox) === 1
       }, common_vendor.unref(changeBox) === 1 ? common_vendor.e({
-        G: common_vendor.unref(scores)
+        I: common_vendor.unref(scores)
       }, common_vendor.unref(scores) ? {
-        H: common_vendor.t(common_vendor.unref(res).rating),
-        I: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
-        J: common_vendor.p({
+        J: common_vendor.t(common_vendor.unref(res).rating),
+        K: common_vendor.t((common_vendor.unref(scores).compare_rating * 100).toFixed(1)),
+        L: common_vendor.p({
           rating: common_vendor.unref(res).rating
         }),
-        K: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
-        L: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
+        M: common_vendor.t(common_vendor.unref(scores).food_score.toFixed(1)),
+        N: common_vendor.t(common_vendor.unref(scores).service_score.toFixed(1))
       } : {}, {
-        M: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
+        O: common_vendor.f(common_vendor.unref(tag), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.count),
             c: i
           };
         }),
-        N: common_vendor.t(common_vendor.unref(rating)[0].username),
-        O: common_vendor.t(common_vendor.unref(rating)[0].username)
+        P: common_vendor.t(common_vendor.unref(rating)[0].username),
+        Q: common_vendor.t(common_vendor.unref(rating)[0].username)
       }) : {}) : {});
     };
   }

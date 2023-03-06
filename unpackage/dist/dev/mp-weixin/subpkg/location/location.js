@@ -61,9 +61,6 @@ const _sfc_main = {
         curplace.value.push(item);
         common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
       }
-      common_vendor.index.switchTab({
-        url: "/pages/index/index"
-      });
     };
     const goIndex = (item) => {
       let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");

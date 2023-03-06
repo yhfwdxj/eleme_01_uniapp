@@ -31,9 +31,9 @@
         </view>
       </view>
       <view class="scroll" v-if="changeBox===0">
-        <view class="">
-          <scroll-view scroll-y="true" class="left-scroll" :style="{height:rightScrollHeight+'rpx' }"
-            :scroll-into-view="leftIntoView">
+        <view class="left-scroll-container">
+          <scroll-view scroll-y="true" class="left-scroll"
+            :style="{height:rightScrollHeight+'rpx',width:leftScrollWidth + 'rpx'  }" :scroll-into-view="leftIntoView">
             <view class="left" v-for="item,i in res2" :key="i" @click="scrollToRight(item,i)" :data-index="i"
               :id="'left'+i" :class="active===i?'active':''">
               {{item.name}}
@@ -41,9 +41,9 @@
           </scroll-view>
         </view>
         <view class="">
-          <scroll-view scroll-y="true" class="right-scroll" :style="{height:rightScrollHeight +'rpx' }"
-            :scroll-top="rightScrollTop2" scroll-with-animation="true" @scroll="rightscr"
-            :scroll-into-view="rightIntoView">
+          <scroll-view scroll-y="true" class="right-scroll"
+            :style="{height:rightScrollHeight +'rpx',width:rightScrollWidth + 'rpx' }" :scroll-top="rightScrollTop2"
+            scroll-with-animation="true" @scroll="rightscr" :scroll-into-view="rightIntoView">
             <block v-for="item,i in res2" :key="i">
               <view class="title" :id="'right'+item.id">
                 {{item.name}}
@@ -75,15 +75,12 @@
           </scroll-view>
         </view>
       </view>
-      <!-- style="{width:curWindowWidth + 'rpx'}" -->
-      <!-- foodsInfo.length!==0 -->
       <view class="shop-cart">
         <view class="haveFood" v-if="foodsInfo.length!==0 &&hasFood">
           <view class="nav">
             <text>已选商品</text>
           </view>
           <view class="curFood" v-for="curFood,i in foodsInfo" :key="i">
-            <!-- <img :src="'https://elm.cangdu.org/img/' + foodsInfo.image" style=width:110rpx;height:100rpx> -->
             <view class="curfood-img">
               <img :src="'https://elm.cangdu.org/img/' + curFood.image_path" style=width:110rpx;height:100rpx>
             </view>
@@ -269,6 +266,8 @@
   let rightIntoView = ref('right0')
   let animationData = reactive({})
   let isclick = false
+  let rightScrollWidth = ref()
+  let leftScrollWidth = ref()
   onLoad(async (option) => {
     shopId.value = option.shop_id
     res.value = await request({
@@ -292,6 +291,8 @@
     } = uni.getSystemInfoSync()
     res3.value = windowHeight
     curWindowWidth.value = windowWidth * 1.8
+    rightScrollWidth.value = curWindowWidth.value * 0.75
+    leftScrollWidth.value = curWindowWidth.value * 0.2
     nextTick(() => {
       const query = uni.createSelectorQuery().in(currentInstance.proxy);
       query.selectAll('.title').boundingClientRect(data => {
@@ -398,7 +399,6 @@
     margin: 30rpx auto;
 
     .shop-container {
-
       padding: 35rpx;
       @extend %box-shadows;
 
@@ -468,19 +468,21 @@
 
       .scroll {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
 
-        .left-scroll {
-          width: 100rpx;
-
-          .left {
-            line-height: 120rpx;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            font-size: 27rpx;
+        .left-scroll-container {
+          .left-scroll {
+            .left {
+              text-align: center;
+              line-height: 120rpx;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              font-size: 27rpx;
+            }
           }
         }
+
 
         .right-scroll {
           overflow: hidden;
@@ -513,6 +515,7 @@
 
             .sale-info {
               margin-left: 10rpx;
+              max-width: 45%;
 
               .name-desc {
                 white-space: nowrap;
@@ -529,7 +532,7 @@
               }
 
               .sale {
-                font-size: 25rpx;
+                font-size: 23rpx;
                 color: rgb(52, 52, 52);
               }
 

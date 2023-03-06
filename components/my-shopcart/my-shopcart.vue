@@ -85,7 +85,6 @@
   const createAnima = (ballX, ballY) => {
     uni.getSystemInfo({
       success(e) {
-        console.log(e.windowWidth);
         let axisX = e.windowWidth * 0.3
         let axisY = e.windowHeight - 20
         let ballFlyX2 = ballFlyX(ballX, axisX)
@@ -135,6 +134,7 @@
 
     .ball-animation {
       position: absolute;
+      z-index: 100;
     }
   }
 </style>

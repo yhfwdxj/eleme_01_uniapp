@@ -3,21 +3,14 @@ var common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "user",
   setup(__props) {
-    let avatarUrl = common_vendor.ref("");
-    const chooseavatar = (e) => {
-      avatarUrl.value = e.detail.avatarUrl;
-      console.log(avatarUrl);
-    };
-    const goSearch = () => {
+    const goLogin = () => {
       common_vendor.index.navigateTo({
-        url: "/subpkg/address/address"
+        url: "/subpkg/login/login"
       });
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.unref(avatarUrl),
-        b: common_vendor.o(chooseavatar),
-        c: common_vendor.o(goSearch)
+        a: common_vendor.o(goLogin)
       };
     };
   }

@@ -54,7 +54,6 @@ const _sfc_main = {
     const createAnima = (ballX2, ballY2) => {
       common_vendor.index.getSystemInfo({
         success(e) {
-          console.log(e.windowWidth);
           let axisX = e.windowWidth * 0.3;
           let axisY = e.windowHeight - 20;
           let ballFlyX2 = ballFlyX(ballX2, axisX);
