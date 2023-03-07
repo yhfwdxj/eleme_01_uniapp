@@ -15,7 +15,7 @@
   const props = defineProps(['rating'])
   const rating = props.rating
   const test = () => {
-    console.log(rating);
+
   }
 </script>
 

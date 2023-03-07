@@ -127,7 +127,7 @@
     let hours = time.getHours() > 9 ? time.getHours() : '0' + time.getHours()
     let minutes = time.getMinutes() > 9 ? time.getMinutes() : '0' + time.getMinutes()
     curTime.value = hours + ':' + minutes
-    address.value = JSON.parse(uni.getStorageSync('curplace') || '[]')[0]
+    address.value = JSON.parse(uni.getStorageSync('address') || '[]')
   })
   const goRemark = () => {
     uni.navigateTo({

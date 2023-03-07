@@ -14,9 +14,13 @@ const _sfc_main = {
   setup(__props) {
     common_vendor.useStore();
     let curCity = common_vendor.ref(0);
+    let geohash = common_vendor.ref("");
+    let cityId = common_vendor.ref("");
     common_vendor.onLoad(async (options) => {
+      cityId.value = options.city_id;
+      geohash.value = options.geohash;
       curCity.value = await utils_request.request({
-        url: `v1/cities/${options.city_id}`
+        url: `v1/cities/${cityId.value}`
       });
       let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
       curplace.value = allplace;
@@ -39,60 +43,43 @@ const _sfc_main = {
       });
     };
     let curplace = common_vendor.ref([]);
-    let setflag = true;
     const curAddress = (item) => {
       let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
-      curplace.value = allplace;
-      if (allplace.length > 0) {
-        curplace.value.forEach((cur, i) => {
-          if (cur.geohash === item.geohash) {
-            setflag = false;
-            curplace.value.splice(i, i);
-            curplace.value.push(item);
-            curplace.value.reverse();
-          }
-        });
-        if (setflag) {
-          curplace.value.push(item);
-          curplace.value.reverse();
-        }
-        common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
-      } else {
-        curplace.value.push(item);
-        common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
-      }
+      let setPlace = /* @__PURE__ */ new Map();
+      allplace.push(item);
+      let res2 = allplace.filter((item2) => {
+        return !setPlace.has(item2.id) && setPlace.set(item2.id, item2.id);
+      });
+      console.log(res2);
+      common_vendor.index.setStorageSync("curplace", JSON.stringify(res2));
+      common_vendor.index.removeStorageSync("address");
+      common_vendor.index.setStorageSync("address", JSON.stringify(item));
+      common_vendor.index.switchTab({
+        url: "/pages/index/index"
+      });
     };
     const goIndex = (item) => {
-      let allplace = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]");
-      curplace.value = allplace;
-      curplace.value.forEach((cur, i) => {
-        if (cur.geohash === item.geohash) {
-          setflag = false;
-          curplace.value.splice(i, i);
-          curplace.value.push(item);
-          curplace.value.reverse();
-        }
-      });
-      if (setflag) {
-        curplace.value.push(item);
-        curplace.value.reverse();
-      }
-      common_vendor.index.setStorageSync("curplace", JSON.stringify(curplace.value));
+      common_vendor.index.removeStorageSync("address");
+      common_vendor.index.setStorageSync("address", JSON.stringify(item));
       common_vendor.index.switchTab({
         url: "/pages/index/index"
       });
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.t(common_vendor.unref(curCity).name),
-        b: common_vendor.o(changeCity),
-        c: common_vendor.o(searchContext),
-        d: common_vendor.p({
-          placeholder: placeholder.value
+        a: common_vendor.unref(curCity)
+      }, common_vendor.unref(curCity) ? common_vendor.e({
+        b: common_vendor.t(common_vendor.unref(curCity).name),
+        c: common_vendor.o(changeCity),
+        d: common_vendor.o(searchContext),
+        e: common_vendor.p({
+          placeholder: placeholder.value,
+          cityId: common_vendor.unref(cityId),
+          geohash: common_vendor.unref(geohash)
         }),
-        e: common_vendor.unref(res)
+        f: common_vendor.unref(res)
       }, common_vendor.unref(res) ? {
-        f: common_vendor.f(common_vendor.unref(res), (item, i, i0) => {
+        g: common_vendor.f(common_vendor.unref(res), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.address),
@@ -101,7 +88,7 @@ const _sfc_main = {
           };
         })
       } : {
-        g: common_vendor.f(common_vendor.unref(curplace), (item, i, i0) => {
+        h: common_vendor.f(common_vendor.unref(curplace), (item, i, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.address),
@@ -109,7 +96,7 @@ const _sfc_main = {
             d: common_vendor.o(($event) => goIndex(item), i)
           };
         })
-      });
+      }) : {});
     };
   }
 };

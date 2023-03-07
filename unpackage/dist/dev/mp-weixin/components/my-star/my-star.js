@@ -7,7 +7,6 @@ const _sfc_main = {
     const props = __props;
     const rating = props.rating;
     const test = () => {
-      console.log(rating);
     };
     return (_ctx, _cache) => {
       return {

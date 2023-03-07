@@ -30,9 +30,6 @@
   import {
     useStore
   } from 'vuex'
-  import {
-    onLoad
-  } from '@dcloudio/uni-app'
   const store = useStore()
   const props = defineProps(['item2', 'shopId'])
   const foodInfo = computed(() => props.item2)

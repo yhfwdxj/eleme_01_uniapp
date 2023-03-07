@@ -36,10 +36,6 @@
     computed,
     watch
   } from 'vue'
-  import {
-    onLoad,
-    onShow
-  } from '@dcloudio/uni-app'
   const props = defineProps(['curCityList', 'curRest', 'searchRest'])
   const imgBaseUrl = 'https://elm.cangdu.org/img/'
   // const imgBaseUrl = '/img/'

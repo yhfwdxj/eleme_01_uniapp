@@ -25,16 +25,15 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `/subpkg/location/location?city_id=${curCityList.value.id}&geohash=${+curCityList.value.latitude},${curCityList.value.longitude}`
       });
-      console.log();
     };
     const changeCur = (item) => {
       common_vendor.index.navigateTo({
-        url: "/subpkg/location/location?city_id=" + item.id
+        url: `/subpkg/location/location?city_id=${item.id}&geohash=${item.latitude},${item.longitude}`
       });
     };
     const changeCur2 = (item) => {
       common_vendor.index.navigateTo({
-        url: "/subpkg/location/location?city_id=" + item.id
+        url: `/subpkg/location/location?city_id=${item.id}&geohash=${item.latitude},${item.longitude}`
       });
     };
     return (_ctx, _cache) => {

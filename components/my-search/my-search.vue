@@ -21,30 +21,25 @@
   } from '@/utils/request.js'
   let id = ref('')
   let geohash = ref('')
-  onLoad((options) => {
-    id = options.city_id
-    geohash = options.geohash
-    console.log(geohash);
-  })
-  const props = defineProps(['placeholder'])
+  const props = defineProps(['placeholder', 'geohash', 'cityId'])
   const emit = defineEmits(['searchContext', 'searchRestaurants'])
   const keyword = ref('')
   let res = ref('')
   let res2 = ref('')
+  id.value = props.cityId
+  geohash.value = props.geohash
+  let cur = JSON.parse(uni.getStorageSync('address') || '{}')
+  let geohash2 = `${cur.location.lat},${cur.location.lng}`
   const search = async () => {
-    if (id && keyword.value) {
-      // res = await request({
-      //   url: `v1/pois?city_id=${id}&keyword=${keyword.value}&type=search`
-      // })
+    if (id.value && keyword.value) {
       res = await uni.request({
-        url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash},1000,1)`,
+        url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash.value},1000,1)`,
         method: 'get'
       })
-
       emit('searchContext', res)
     } else {
       res = await request(({
-        url: `v4/restaurants?geohash=${geohash}&keyword=${keyword.value}`
+        url: `v4/restaurants?geohash=${geohash2}&keyword=${keyword.value}`
       }))
       emit('searchRestaurants', res)
     }

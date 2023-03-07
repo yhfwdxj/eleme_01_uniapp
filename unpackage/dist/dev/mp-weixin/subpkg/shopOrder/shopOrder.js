@@ -21,7 +21,7 @@ const _sfc_main = {
       let hours = time.getHours() > 9 ? time.getHours() : "0" + time.getHours();
       let minutes = time.getMinutes() > 9 ? time.getMinutes() : "0" + time.getMinutes();
       curTime.value = hours + ":" + minutes;
-      address.value = JSON.parse(common_vendor.index.getStorageSync("curplace") || "[]")[0];
+      address.value = JSON.parse(common_vendor.index.getStorageSync("address") || "[]");
     });
     const goRemark = () => {
       common_vendor.index.navigateTo({

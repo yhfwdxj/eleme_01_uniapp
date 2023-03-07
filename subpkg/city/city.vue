@@ -63,16 +63,18 @@
     uni.navigateTo({
       url: `/subpkg/location/location?city_id=${curCityList.value.id}&geohash=${ + curCityList.value.latitude},${curCityList.value.longitude}`
     });
-    console.log();
   }
   const changeCur = (item) => {
+    // uni.navigateTo({
+    //   url: '/subpkg/location/location?city_id=' + item.id
+    // });
     uni.navigateTo({
-      url: '/subpkg/location/location?city_id=' + item.id
+      url: `/subpkg/location/location?city_id=${item.id}&geohash=${ item.latitude},${item.longitude}`
     });
   }
   const changeCur2 = (item) => {
     uni.navigateTo({
-      url: '/subpkg/location/location?city_id=' + item.id
+      url: `/subpkg/location/location?city_id=${item.id}&geohash=${ item.latitude},${item.longitude}`
     });
   }
 </script>

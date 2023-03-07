@@ -1,5 +1,5 @@
 <template>
-  <view class="location-container">
+  <view class="location-container" v-if="curCity">
     <view class="cur-city">
       <view>当前城市:{{curCity.name}}</view>
       <view style="margin-right: 10rpx;color: blue;" @click="changeCity">
@@ -7,7 +7,8 @@
       </view>
     </view>
     <view class="input">
-      <my-search :placeholder='placeholder' @searchContext='searchContext'></my-search>
+      <my-search :placeholder='placeholder' @searchContext='searchContext' :cityId='cityId' :geohash='geohash'>
+      </my-search>
     </view>
     <view class="search-result" v-if="res">
       <view class="search-list" v-for="item,i in res" :key="i" @click="curAddress(item)">
@@ -42,9 +43,13 @@
   } from '@/utils/request.js'
   const store = useStore()
   let curCity = ref(0)
+  let geohash = ref('')
+  let cityId = ref('')
   onLoad(async (options) => {
+    cityId.value = options.city_id
+    geohash.value = options.geohash
     curCity.value = await request({
-      url: `v1/cities/${options.city_id}`
+      url: `v1/cities/${cityId.value}`
     })
     let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')
     curplace.value = allplace
@@ -70,45 +75,22 @@
   let setflag = true
   const curAddress = (item) => {
     let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')
-    curplace.value = allplace
-    if (allplace.length > 0) {
-      curplace.value.forEach((cur, i) => {
-        if (cur.geohash === item.geohash) {
-          setflag = false
-          curplace.value.splice(i, i)
-          curplace.value.push(item)
-          curplace.value.reverse()
-        }
-      })
-      if (setflag) {
-        curplace.value.push(item)
-        curplace.value.reverse()
-      }
-      uni.setStorageSync('curplace', JSON.stringify(curplace.value))
-    } else {
-      curplace.value.push(item)
-      uni.setStorageSync('curplace', JSON.stringify(curplace.value))
-    }
-    // uni.switchTab({
-    //   url: "/pages/index/index"
-    // })
+    let setPlace = new Map()
+    allplace.push(item)
+    let res = allplace.filter((item2) => {
+      return !setPlace.has(item2.id) && setPlace.set(item2.id, item2.id)
+    })
+    console.log(res);
+    uni.setStorageSync('curplace', JSON.stringify(res))
+    uni.removeStorageSync('address');
+    uni.setStorageSync('address', JSON.stringify(item))
+    uni.switchTab({
+      url: "/pages/index/index"
+    })
   }
   const goIndex = (item) => {
-    let allplace = JSON.parse(uni.getStorageSync('curplace') || '[]')
-    curplace.value = allplace
-    curplace.value.forEach((cur, i) => {
-      if (cur.geohash === item.geohash) {
-        setflag = false
-        curplace.value.splice(i, i)
-        curplace.value.push(item)
-        curplace.value.reverse()
-      }
-    })
-    if (setflag) {
-      curplace.value.push(item)
-      curplace.value.reverse()
-    }
-    uni.setStorageSync('curplace', JSON.stringify(curplace.value))
+    uni.removeStorageSync('address');
+    uni.setStorageSync('address', JSON.stringify(item))
     uni.switchTab({
       url: "/pages/index/index"
     })

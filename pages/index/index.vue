@@ -74,7 +74,7 @@
   let geohash = ref()
   const goSearch = () => {
     uni.navigateTo({
-      url: `/subpkg/search/search?geohash=${geohash}`
+      url: `/subpkg/search/search?geohash=${ geohash.value}`
     })
   }
   onLoad(async () => {
@@ -91,12 +91,12 @@
     data2.value = res
   })
   onShow(() => {
-    curPlace = JSON.parse(uni.getStorageSync('curplace') || '[]')
-    if (curPlace.length) {
-      latitude.value = curPlace[0].latitude
-      longitude.value = curPlace[0].longitude
-      location.value = curPlace[0].title
-      geohash = curPlace[0].geohash
+    curPlace = JSON.parse(uni.getStorageSync('address') || '{}')
+    if (curPlace.id) {
+      latitude.value = curPlace.location.lat
+      longitude.value = curPlace.location.lng
+      location.value = curPlace.title
+      geohash.value = `${latitude.value},${longitude.value}`
       store.dispatch('restaurants/getRestaurants', {
         latitude,
         longitude,
