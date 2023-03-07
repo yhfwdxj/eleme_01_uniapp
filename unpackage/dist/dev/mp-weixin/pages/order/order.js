@@ -6,14 +6,17 @@ const _sfc_main = {
   setup(__props) {
     const store = common_vendor.useStore();
     let orderList = common_vendor.computed$1(() => store.state.shopcart.order);
+    console.log(orderList);
     let shop = common_vendor.ref();
     let shopImg = common_vendor.ref();
     const imgBaseUrl = "https://elm.cangdu.org/img/";
     common_vendor.onLoad(async () => {
-      shop.value = await utils_request.request({
-        url: `shopping/restaurant/${orderList.value[0].shopId}`
-      });
-      shopImg.value = shop.value.image_path;
+      if (orderList.value.length > 0) {
+        shop.value = await utils_request.request({
+          url: `shopping/restaurant/${orderList.value[0].shopId}`
+        });
+        shopImg.value = shop.value.image_path;
+      }
     });
     const again = () => {
       store.commit("shopcart/again");
@@ -23,8 +26,8 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.unref(orderList)
-      }, common_vendor.unref(orderList) ? common_vendor.e({
+        a: common_vendor.unref(orderList).length > 0
+      }, common_vendor.unref(orderList).length > 0 ? common_vendor.e({
         b: common_vendor.unref(shop)
       }, common_vendor.unref(shop) ? {
         c: imgBaseUrl + common_vendor.unref(shopImg),

@@ -1,5 +1,5 @@
 <template>
-  <view class="order-container" v-if="orderList">
+  <view class="order-container" v-if="orderList.length>0">
     <view class="order">
       <view class="total-info" v-if="shop">
         <img :src="imgBaseUrl + shopImg" style="width: 80rpx;height: 80rpx;">
@@ -44,14 +44,17 @@
   } from '@/utils/request.js'
   const store = useStore()
   let orderList = computed(() => store.state.shopcart.order)
+  console.log(orderList);
   let shop = ref()
   let shopImg = ref()
   const imgBaseUrl = 'https://elm.cangdu.org/img/'
   onLoad(async () => {
-    shop.value = await request({
-      url: `shopping/restaurant/${orderList.value[0].shopId}`
-    })
-    shopImg.value = shop.value.image_path
+    if (orderList.value.length > 0) {
+      shop.value = await request({
+        url: `shopping/restaurant/${orderList.value[0].shopId}`
+      })
+      shopImg.value = shop.value.image_path
+    }
   })
   const again = () => {
     store.commit('shopcart/again')
