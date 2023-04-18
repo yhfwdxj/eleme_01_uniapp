@@ -18,8 +18,13 @@
         </view>
       </view>
     </view>
+    <view class="jump">
+      <view class="char" v-for="item,i in char" :key="i" @click="jumpChar(item)">
+        <text>{{item}}</text>
+      </view>
+    </view>
     <view class="group-city" v-for="order,k,i in groupCityOrder" :key="i">
-      <view class="group-text">
+      <view class="group-text" :id="k">
         <text v-if="i === 0">按首字母排序 &nbsp;</text>
         <text class="single">{{k}}:</text>
       </view>
@@ -33,7 +38,9 @@
 <script setup>
   import {
     computed,
-    reactive
+    ref,
+    reactive,
+    nextTick
   } from 'vue'
   import {
     onLoad
@@ -46,14 +53,23 @@
     store.dispatch('city/getCityList', 'guess')
     store.dispatch('city/getCityList', 'hot')
     store.dispatch('city/getCityList', 'group')
+    nextTick(() => {
+
+    })
   })
+  let char = ref([])
   const curCityList = computed(() => store.state.city.curCityList)
   const hotCityList = computed(() => store.state.city.hotCityList)
   const groupCityList = computed(() => store.state.city.groupCityList)
   const groupCityOrder = computed(() => {
     let group = reactive({})
+    let newChar = ''
     for (let i = 65; i <= 90; i++) {
       if (groupCityList.value[String.fromCharCode(i)]) {
+        newChar = String.fromCharCode(i)
+        if (!char.value[i]) {
+          char.value.push(newChar)
+        }
         group[String.fromCharCode(i)] = groupCityList.value[String.fromCharCode(i)]
       }
     }
@@ -76,6 +92,12 @@
     uni.navigateTo({
       url: `/subpkg/location/location?city_id=${item.id}&geohash=${ item.latitude},${item.longitude}`
     });
+  }
+  const jumpChar = (char) => {
+    uni.pageScrollTo({
+      selector: '#' + char,
+      duration: 300,
+    })
   }
 </script>
 
@@ -145,6 +167,17 @@
           border: 1px solid rgb(228, 228, 228);
         }
       }
+    }
+
+    .jump {
+      position: fixed;
+      right: 4rpx;
+      top: 17%;
+      border: 2rpx solid rgba(231, 231, 231, 0.9);
+      text-align: center;
+      border-radius: 15rpx;
+      font-size: 30rpx;
+      color: rgba(0, 0, 0, 0.4);
     }
 
     .group-city {

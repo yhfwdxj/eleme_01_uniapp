@@ -8,14 +8,22 @@ const _sfc_main = {
       store.dispatch("city/getCityList", "guess");
       store.dispatch("city/getCityList", "hot");
       store.dispatch("city/getCityList", "group");
+      common_vendor.nextTick(() => {
+      });
     });
+    let char = common_vendor.ref([]);
     const curCityList = common_vendor.computed$1(() => store.state.city.curCityList);
     const hotCityList = common_vendor.computed$1(() => store.state.city.hotCityList);
     const groupCityList = common_vendor.computed$1(() => store.state.city.groupCityList);
     const groupCityOrder = common_vendor.computed$1(() => {
       let group = common_vendor.reactive({});
+      let newChar = "";
       for (let i = 65; i <= 90; i++) {
         if (groupCityList.value[String.fromCharCode(i)]) {
+          newChar = String.fromCharCode(i);
+          if (!char.value[i]) {
+            char.value.push(newChar);
+          }
           group[String.fromCharCode(i)] = groupCityList.value[String.fromCharCode(i)];
         }
       }
@@ -36,6 +44,12 @@ const _sfc_main = {
         url: `/subpkg/location/location?city_id=${item.id}&geohash=${item.latitude},${item.longitude}`
       });
     };
+    const jumpChar = (char2) => {
+      common_vendor.index.pageScrollTo({
+        selector: "#" + char2,
+        duration: 300
+      });
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(curCityList)
@@ -51,19 +65,27 @@ const _sfc_main = {
             c: common_vendor.o(($event) => changeCur(item), index)
           };
         }),
-        f: common_vendor.f(common_vendor.unref(groupCityOrder), (order, k, i) => {
+        f: common_vendor.f(common_vendor.unref(char), (item, i, i0) => {
+          return {
+            a: common_vendor.t(item),
+            b: i,
+            c: common_vendor.o(($event) => jumpChar(item), i)
+          };
+        }),
+        g: common_vendor.f(common_vendor.unref(groupCityOrder), (order, k, i) => {
           return common_vendor.e({
             a: i === 0
           }, i === 0 ? {} : {}, {
             b: common_vendor.t(k),
-            c: common_vendor.f(order, (orderList, i2, i1) => {
+            c: k,
+            d: common_vendor.f(order, (orderList, i2, i1) => {
               return {
                 a: common_vendor.t(orderList.name),
                 b: common_vendor.o(($event) => changeCur2(orderList)),
                 c: i2
               };
             }),
-            d: i
+            e: i
           });
         })
       });
