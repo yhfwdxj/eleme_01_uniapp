@@ -83,6 +83,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "userInfo/userInfo",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 
   }],

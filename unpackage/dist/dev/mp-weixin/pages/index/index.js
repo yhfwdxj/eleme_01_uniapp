@@ -1,24 +1,5 @@
 "use strict";
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var common_vendor = require("../../common/vendor.js");
+const common_vendor = require("../../common/vendor.js");
 if (!Array) {
   const _easycom_my_search2 = common_vendor.resolveComponent("my-search");
   const _easycom_my_restaurants2 = common_vendor.resolveComponent("my-restaurants");
@@ -39,8 +20,8 @@ const _sfc_main = {
       curCityList: "",
       curRest: ""
     });
-    resList.curCityList = common_vendor.computed$1(() => store.state.city.curCityList);
-    resList.curRest = common_vendor.computed$1(() => store.state.restaurants.restList);
+    resList.curCityList = common_vendor.computed(() => store.state.city.curCityList);
+    resList.curRest = common_vendor.computed(() => store.state.restaurants.restList);
     let data1 = common_vendor.ref();
     let data2 = common_vendor.ref();
     let location = common_vendor.ref("");
@@ -58,9 +39,10 @@ const _sfc_main = {
         url: "v2/index_entry"
       });
       res = res.map((item) => {
-        return __spreadProps(__spreadValues({}, item), {
+        return {
+          ...item,
           image_url: "https://fuss10.elemecdn.com" + item.image_url
-        });
+        };
       });
       data1.value = res.splice(0, 8);
       data2.value = res;
@@ -96,7 +78,7 @@ const _sfc_main = {
         url: "/subpkg/city/city"
       });
     };
-    const placeholder = common_vendor.ref("\u8BF7\u8F93\u5165\u5546\u5BB6\u6216\u7F8E\u98DF");
+    const placeholder = common_vendor.ref("请输入商家或美食");
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(location)
@@ -104,10 +86,10 @@ const _sfc_main = {
         b: common_vendor.t(common_vendor.unref(location))
       } : {}, {
         c: common_vendor.o(goCityList),
-        d: 40 + "rpx",
-        e: 40 + "rpx",
-        f: 40 + "rpx",
-        g: 40 + "rpx",
+        d: "40rpx",
+        e: "40rpx",
+        f: "40rpx",
+        g: "40rpx",
         h: common_vendor.p({
           placeholder: placeholder.value
         }),
@@ -126,10 +108,12 @@ const _sfc_main = {
             c: index
           };
         }),
-        l: common_vendor.p(__spreadValues({}, common_vendor.unref(resList)))
+        l: common_vendor.p({
+          ...common_vendor.unref(resList)
+        })
       });
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

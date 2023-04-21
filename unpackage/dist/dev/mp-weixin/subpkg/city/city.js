@@ -1,5 +1,5 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
+const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "city",
   setup(__props) {
@@ -8,14 +8,14 @@ const _sfc_main = {
       store.dispatch("city/getCityList", "guess");
       store.dispatch("city/getCityList", "hot");
       store.dispatch("city/getCityList", "group");
-      common_vendor.nextTick(() => {
+      common_vendor.nextTick$1(() => {
       });
     });
     let char = common_vendor.ref([]);
-    const curCityList = common_vendor.computed$1(() => store.state.city.curCityList);
-    const hotCityList = common_vendor.computed$1(() => store.state.city.hotCityList);
-    const groupCityList = common_vendor.computed$1(() => store.state.city.groupCityList);
-    const groupCityOrder = common_vendor.computed$1(() => {
+    const curCityList = common_vendor.computed(() => store.state.city.curCityList);
+    const hotCityList = common_vendor.computed(() => store.state.city.hotCityList);
+    const groupCityList = common_vendor.computed(() => store.state.city.groupCityList);
+    const groupCityOrder = common_vendor.computed(() => {
       let group = common_vendor.reactive({});
       let newChar = "";
       for (let i = 65; i <= 90; i++) {
@@ -81,7 +81,7 @@ const _sfc_main = {
             d: common_vendor.f(order, (orderList, i2, i1) => {
               return {
                 a: common_vendor.t(orderList.name),
-                b: common_vendor.o(($event) => changeCur2(orderList)),
+                b: common_vendor.o(($event) => changeCur2(orderList), i2),
                 c: i2
               };
             }),
@@ -92,5 +92,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/city/city.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/city/city.vue"]]);
 wx.createPage(MiniProgramPage);

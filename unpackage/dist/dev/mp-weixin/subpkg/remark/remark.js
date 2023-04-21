@@ -1,6 +1,6 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
-var utils_request = require("../../utils/request.js");
+const common_vendor = require("../../common/vendor.js");
+const utils_request = require("../../utils/request.js");
 const _sfc_main = {
   __name: "remark",
   setup(__props) {
@@ -47,5 +47,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/remark/remark.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/remark/remark.vue"]]);
 wx.createPage(MiniProgramPage);

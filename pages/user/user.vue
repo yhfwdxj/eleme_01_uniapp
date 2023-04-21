@@ -1,17 +1,21 @@
 <template>
   <view class="user-container">
-    <view class="userInfo" @click="goLogin">
+    <view class="userInfo">
       <view class="avatar">
         <img src="../../static/头像-01.png" style="width: 100rpx; height: 100rpx;">
       </view>
-      <view class="login">
+      <view class="login" @click="goLogin" v-if="!userInfo">
         <text style="font-size: 38rpx;">登录/注册</text>
+      </view>
+      <view class="login" v-else>
+        <text style="font-size: 38rpx;">{{userInfo.username}}</text>
       </view>
     </view>
     <view class="money">
       <view style="text-align: center;">
         <view class="count">
-          <text style="color: orange;font-size: 60rpx;">0.00</text>
+          <text style="color: orange;font-size: 60rpx;" v-if="userInfo">{{userInfo.money}}</text>
+          <text style="color: orange;font-size: 60rpx;" v-else>0.00</text>
           <text>元</text>
         </view>
         <view class="">
@@ -20,7 +24,8 @@
       </view>
       <view style="text-align: center;">
         <view class="count">
-          <text style="color: skyblue;font-size: 60rpx;">0</text>
+          <text style="color: skyblue;font-size: 60rpx;" v-if="userInfo">{{userInfo.card}}</text>
+          <text style="color: skyblue;font-size: 60rpx;" v-else>0</text>
           <text>个</text>
         </view>
         <view class="">
@@ -29,7 +34,8 @@
       </view>
       <view style="text-align: center;">
         <view class="count">
-          <text style="color: red;font-size: 60rpx;">0</text>
+          <text style="color: red;font-size: 60rpx;" v-if="userInfo">{{userInfo.envelope}}</text>
+          <text style="color: red;font-size: 60rpx;" v-else>0</text>
           <text>个</text>
         </view>
         <view class="">
@@ -61,17 +67,36 @@
       </view>
     </view>
   </view>
-
 </template>
 
 <script setup>
   import {
-    ref
+    ref,
+    reactive
   } from 'vue'
-
+  import {
+    useStore
+  } from 'vuex'
+  import {
+    onLoad,
+    onShow
+  } from '@dcloudio/uni-app'
+  onShow(() => {
+    if (store.state.user.userInfo.code === "200") {
+      userInfo.value = store.state.user.userInfo
+    }
+  })
+  const store = useStore()
+  let userInfo = ref()
+  let imgUrl = ref()
   const goLogin = () => {
     uni.navigateTo({
       url: '/subpkg/login/login'
+    })
+  }
+  const goInfo = () => {
+    uni.navigateTo({
+      url: '/subpkg/userInfo/userInfo'
     })
   }
 </script>

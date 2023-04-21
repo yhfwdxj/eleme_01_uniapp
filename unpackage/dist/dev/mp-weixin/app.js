@@ -1,12 +1,13 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports[Symbol.toStringTag] = "Module";
-var common_vendor = require("./common/vendor.js");
-var utils_request = require("./utils/request.js");
-var store_index = require("./store/index.js");
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const common_vendor = require("./common/vendor.js");
+const utils_request = require("./utils/request.js");
+const store_index = require("./store/index.js");
+require("./mock/index.js");
 require("./store/modules/city.js");
 require("./store/modules/restaurants.js");
 require("./store/modules/shopcart.js");
+require("./store/modules/user.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/order/order.js";
@@ -19,6 +20,7 @@ if (!Math) {
   "./subpkg/address/address.js";
   "./subpkg/remark/remark.js";
   "./subpkg/login/login.js";
+  "./subpkg/userInfo/userInfo.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -31,7 +33,7 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-var App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.provide("request", utils_request.request);

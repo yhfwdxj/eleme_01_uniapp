@@ -1,5 +1,5 @@
 "use strict";
-var shopcart = {
+const shopcart = {
   namespaced: true,
   state() {
     return {

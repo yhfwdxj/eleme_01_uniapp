@@ -15,7 +15,8 @@
         "shopOrder/shopOrder",
         "address/address",
         "remark/remark",
-        "login/login"
+        "login/login",
+        "userInfo/userInfo"
       ]
     }
   ],

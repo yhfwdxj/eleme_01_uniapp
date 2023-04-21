@@ -1,6 +1,6 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
-var utils_request = require("../../utils/request.js");
+const common_vendor = require("../../common/vendor.js");
+const utils_request = require("../../utils/request.js");
 if (!Array) {
   const _easycom_my_search2 = common_vendor.resolveComponent("my-search");
   _easycom_my_search2();
@@ -26,13 +26,13 @@ const _sfc_main = {
       curplace.value = allplace;
     });
     let res = common_vendor.ref();
-    const placeholder = common_vendor.ref("\u8BF7\u8F93\u5165\u5730\u5740");
+    const placeholder = common_vendor.ref("请输入地址");
     const searchContext = (emit) => {
       if (emit.data) {
         res.value = emit.data.data;
       } else {
         common_vendor.index.showToast({
-          title: "\u65E0\u8FD4\u56DE\u5185\u5BB9",
+          title: "无返回内容",
           icon: "error"
         });
       }
@@ -100,5 +100,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/location/location.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/location/location.vue"]]);
 wx.createPage(MiniProgramPage);

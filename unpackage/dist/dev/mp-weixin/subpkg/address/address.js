@@ -1,5 +1,5 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
+const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "address",
   setup(__props) {
@@ -25,7 +25,7 @@ const _sfc_main = {
           return {
             a: common_vendor.t(item.address),
             b: common_vendor.n(i === common_vendor.unref(active) ? "active" : ""),
-            c: common_vendor.o(($event) => changeActive(i, item)),
+            c: common_vendor.o(($event) => changeActive(i, item), i),
             d: i
           };
         })
@@ -33,5 +33,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/address/address.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/address/address.vue"]]);
 wx.createPage(MiniProgramPage);

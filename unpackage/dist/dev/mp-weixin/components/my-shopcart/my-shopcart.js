@@ -1,13 +1,13 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
+const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "my-shopcart",
   props: ["item2", "shopId"],
   setup(__props) {
     const props = __props;
     const store = common_vendor.useStore();
-    const foodInfo = common_vendor.computed$1(() => props.item2);
-    const shopId = common_vendor.computed$1(() => props.shopId);
+    const foodInfo = common_vendor.computed(() => props.item2);
+    const shopId = common_vendor.computed(() => props.shopId);
     let ballX = common_vendor.ref();
     let ballY = common_vendor.ref();
     let ballXAni = common_vendor.ref();
@@ -24,6 +24,7 @@ const _sfc_main = {
       quantity: 0,
       sku_id: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].sku_id : foodInfo.value.sku_id,
       specs: foodInfo.value.specfoods ? foodInfo.value.specfoods[0].specs[0] : [""],
+      // specs: foodInfo.specfoods[0].specs[0] || [""],
       stock: 1e3,
       num: 0,
       image_path: foodInfo.value.image_path
@@ -101,5 +102,5 @@ const _sfc_main = {
     };
   }
 };
-var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/components/my-shopcart/my-shopcart.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/components/my-shopcart/my-shopcart.vue"]]);
 wx.createComponent(Component);

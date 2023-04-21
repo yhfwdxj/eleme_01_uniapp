@@ -1,6 +1,6 @@
 "use strict";
-var utils_request = require("../../utils/request.js");
-var restaurants = {
+const utils_request = require("../../utils/request.js");
+const restaurants = {
   namespaced: true,
   state() {
     return {

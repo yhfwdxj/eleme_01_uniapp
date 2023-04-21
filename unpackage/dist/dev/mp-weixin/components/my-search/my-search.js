@@ -1,6 +1,6 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
-var utils_request = require("../../utils/request.js");
+const common_vendor = require("../../common/vendor.js");
+const utils_request = require("../../utils/request.js");
 const _sfc_main = {
   __name: "my-search",
   props: ["placeholder", "geohash", "cityId"],
@@ -40,5 +40,5 @@ const _sfc_main = {
     };
   }
 };
-var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/components/my-search/my-search.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/components/my-search/my-search.vue"]]);
 wx.createComponent(Component);

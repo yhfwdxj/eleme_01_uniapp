@@ -1,5 +1,5 @@
 "use strict";
-var common_vendor = require("../common/vendor.js");
+const common_vendor = require("../common/vendor.js");
 const baseUrl = "https://elm.cangdu.org/";
 const request = (options) => {
   return new Promise((resolve, reject) => {

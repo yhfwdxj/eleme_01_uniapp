@@ -1,11 +1,11 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
-var utils_request = require("../../utils/request.js");
+const common_vendor = require("../../common/vendor.js");
+const utils_request = require("../../utils/request.js");
 const _sfc_main = {
   __name: "order",
   setup(__props) {
     const store = common_vendor.useStore();
-    let orderList = common_vendor.computed$1(() => store.state.shopcart.order);
+    let orderList = common_vendor.computed(() => store.state.shopcart.order);
     console.log(orderList);
     let shop = common_vendor.ref();
     let shopImg = common_vendor.ref();
@@ -46,5 +46,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/pages/order/order.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/pages/order/order.vue"]]);
 wx.createPage(MiniProgramPage);

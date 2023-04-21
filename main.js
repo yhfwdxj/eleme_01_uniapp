@@ -18,6 +18,8 @@ import {
   request
 } from '@/utils/request.js'
 import store from "@/store"
+import './mock/index.js'
+
 export function createApp() {
   const app = createSSRApp(App)
   app.provide('request', request)

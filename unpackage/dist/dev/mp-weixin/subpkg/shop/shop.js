@@ -1,6 +1,6 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
-var utils_request = require("../../utils/request.js");
+const common_vendor = require("../../common/vendor.js");
+const utils_request = require("../../utils/request.js");
 if (!Array) {
   const _easycom_my_shopcart2 = common_vendor.resolveComponent("my-shopcart");
   const _easycom_my_star2 = common_vendor.resolveComponent("my-star");
@@ -31,7 +31,7 @@ const _sfc_main = {
     const store = common_vendor.useStore();
     let hasFood = common_vendor.ref(false);
     common_vendor.ref(0);
-    let foodsInfo = common_vendor.computed$1(() => store.state.shopcart.cart);
+    let foodsInfo = common_vendor.computed(() => store.state.shopcart.cart);
     let changeBox = common_vendor.ref(0);
     common_vendor.ref();
     let timer = void 0;
@@ -66,7 +66,7 @@ const _sfc_main = {
       curWindowWidth.value = windowWidth * 1.8;
       rightScrollWidth.value = curWindowWidth.value * 0.75;
       leftScrollWidth.value = curWindowWidth.value * 0.2;
-      common_vendor.nextTick(() => {
+      common_vendor.nextTick$1(() => {
         const query = common_vendor.index.createSelectorQuery().in(currentInstance.proxy);
         query.selectAll(".title").boundingClientRect((data) => {
           data.forEach((item, i) => {
@@ -169,7 +169,7 @@ const _sfc_main = {
                 d: common_vendor.t(item2.month_sales),
                 e: common_vendor.t(item2.satisfy_rate),
                 f: common_vendor.t(item2.specfoods[0].price),
-                g: "2a42858c-0-" + i0 + "-" + i1,
+                g: "5cef12df-0-" + i0 + "-" + i1,
                 h: common_vendor.p({
                   item2,
                   shopId: common_vendor.unref(shopId)
@@ -180,8 +180,8 @@ const _sfc_main = {
             d: i
           };
         }),
-        r: 140 + "rpx",
-        s: 140 + "rpx",
+        r: "140rpx",
+        s: "140rpx",
         t: common_vendor.unref(rightScrollHeight) + "rpx",
         v: common_vendor.unref(rightScrollWidth) + "rpx",
         w: common_vendor.unref(rightScrollTop2),
@@ -197,10 +197,10 @@ const _sfc_main = {
             c: common_vendor.t(curFood.price),
             d: curFood.num !== 0
           }, curFood.num !== 0 ? {
-            e: common_vendor.o(($event) => reduce(curFood)),
+            e: common_vendor.o(($event) => reduce(curFood), i),
             f: common_vendor.t(curFood.num)
           } : {}, {
-            g: common_vendor.o(($event) => add(curFood)),
+            g: common_vendor.o(($event) => add(curFood), i),
             h: i
           });
         })
@@ -239,5 +239,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-2a42858c"], ["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/shop/shop.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-5cef12df"], ["__file", "E:/Study/myWork/eleme_01_uniapp/subpkg/shop/shop.vue"]]);
 wx.createPage(MiniProgramPage);

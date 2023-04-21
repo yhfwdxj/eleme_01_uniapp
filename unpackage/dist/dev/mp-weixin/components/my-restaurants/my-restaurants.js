@@ -1,5 +1,5 @@
 "use strict";
-var common_vendor = require("../../common/vendor.js");
+const common_vendor = require("../../common/vendor.js");
 if (!Array) {
   const _easycom_my_star2 = common_vendor.resolveComponent("my-star");
   _easycom_my_star2();
@@ -14,9 +14,9 @@ const _sfc_main = {
   setup(__props) {
     const props = __props;
     const imgBaseUrl = "https://elm.cangdu.org/img/";
-    common_vendor.computed$1(() => props.curCityList);
-    let curRest = common_vendor.computed$1(() => props.curRest);
-    let searchRest = common_vendor.computed$1(() => props.searchRest);
+    common_vendor.computed(() => props.curCityList);
+    let curRest = common_vendor.computed(() => props.curRest);
+    let searchRest = common_vendor.computed(() => props.searchRest);
     curRest.rating;
     common_vendor.watch(searchRest, (newValue, oldValue) => {
       if (searchRest.value) {
@@ -56,5 +56,5 @@ const _sfc_main = {
     };
   }
 };
-var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/components/my-restaurants/my-restaurants.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "E:/Study/myWork/eleme_01_uniapp/components/my-restaurants/my-restaurants.vue"]]);
 wx.createComponent(Component);
