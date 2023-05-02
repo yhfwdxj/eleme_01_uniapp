@@ -1,7 +1,8 @@
 <template>
   <view class="my-search">
     <view class="search">
-      <input type="search" :placeholder="placeholder" class="input-search" v-model="keyword">
+      <input type="search" :placeholder="placeholder" class="input-search" v-model="keyword" :focus="isFocus"
+        @blur="blurChange">
     </view>
     <view class="text-container" @click="search">
       <text>搜索</text>
@@ -23,26 +24,42 @@
   let geohash = ref('')
   const props = defineProps(['placeholder', 'geohash', 'cityId'])
   const emit = defineEmits(['searchContext', 'searchRestaurants'])
-  const keyword = ref('')
+  let isFocus = ref(true)
+  let keyword = ref('')
   let res = ref('')
   let res2 = ref('')
   id.value = props.cityId
   geohash.value = props.geohash
-  let cur = JSON.parse(uni.getStorageSync('address') || '{}')
-  let geohash2 = `${cur.location.lat},${cur.location.lng}`
-  const search = async () => {
-    if (id.value && keyword.value) {
-      res = await uni.request({
-        url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash.value},1000,1)`,
-        method: 'get'
-      })
-      emit('searchContext', res)
-    } else {
-      res = await request(({
-        url: `v4/restaurants?geohash=${geohash2}&keyword=${keyword.value}`
-      }))
-      emit('searchRestaurants', res)
+  onLoad(() => {
+    if (uni.getStorageSync('address')) {
+      let cur = JSON.parse(uni.getStorageSync('address') || '{}')
+      let geohash2 = `${cur.location.lat},${cur.location.lng}`
     }
+  })
+  const blurChange = (e) => {
+    keyword.value = e.detail.value
+  }
+  const search = async () => {
+    isFocus.value = false
+    console.log(1, keyword);
+    let test
+    clearTimeout(test)
+    test = setTimeout(async () => {
+      if (id.value && keyword.value) {
+        console.log(2, keyword);
+        res = await uni.request({
+          url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash.value},1000,1)`,
+          method: 'get'
+        })
+        emit('searchContext', res)
+      } else {
+        console.log(3, keyword);
+        res = await request(({
+          url: `v4/restaurants?geohash=${geohash2}&keyword=${keyword.value}`
+        }))
+        emit('searchRestaurants', res)
+      }
+    }, 300)
   }
 </script>
 

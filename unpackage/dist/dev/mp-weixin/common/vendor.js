@@ -1266,8 +1266,8 @@ function populateParameters(fromRes, toRes) {
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.7.13",
-    uniRuntimeVersion: "3.7.13",
+    uniCompileVersion: "3.8.0",
+    uniRuntimeVersion: "3.8.0",
     uniPlatform: "mp-weixin",
     deviceBrand,
     deviceModel: model,
@@ -1509,17 +1509,13 @@ function isWxKey(key) {
   return objectKeys.indexOf(key) > -1 || typeof wx[key] === "function";
 }
 function initWx() {
-  let global2 = wx;
-  if (typeof globalThis !== "undefined" && globalThis.wx && wx !== globalThis.wx) {
-    global2 = globalThis.wx;
-  }
   const newWx = {};
-  for (const key in global2) {
+  for (const key in wx) {
     if (isWxKey(key)) {
-      newWx[key] = global2[key];
+      newWx[key] = wx[key];
     }
   }
-  if (typeof globalThis !== "undefined") {
+  if (typeof globalThis !== "undefined" && typeof requireMiniProgram === "undefined") {
     globalThis.wx = newWx;
   }
   return newWx;
