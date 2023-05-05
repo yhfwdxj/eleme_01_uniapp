@@ -4,7 +4,7 @@
       <input type="text" v-model="account" placeholder="账号:">
     </view>
     <view class="container">
-      <input type="safe-password" v-model="password" placeholder="密码:">
+      <input type="password" v-model="password" placeholder="密码:">
     </view>
     <view class="container">
       <input type="text" placeholder="验证码:" v-model="captchas">
@@ -38,8 +38,8 @@
     request
   } from '../../utils/request.js'
   const store = useStore()
-  const account = ref(13512345678)
-  const password = ref("123456")
+  const account = ref("")
+  const password = ref("")
   const captchas = ref()
   const code = ref()
   let isMp = ref()

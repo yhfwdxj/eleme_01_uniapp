@@ -53,7 +53,7 @@
         emit('searchContext', res)
       } else {
         res = await request(({
-          url: `v4/restaurants?geohash=${geohash2.value}&keyword=${keyword.value}`
+          url: `v4/restaurants?geohash=${geohash2.value}&keyword=${encodeURI(keyword.value)}`
         }))
         emit('searchRestaurants', res)
       }

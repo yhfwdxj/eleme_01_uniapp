@@ -5,8 +5,8 @@ const _sfc_main = {
   __name: "login",
   setup(__props) {
     const store = common_vendor.useStore();
-    const account = common_vendor.ref(13512345678);
-    const password = common_vendor.ref("123456");
+    const account = common_vendor.ref("");
+    const password = common_vendor.ref("");
     const captchas = common_vendor.ref();
     const code = common_vendor.ref();
     let isMp = common_vendor.ref();

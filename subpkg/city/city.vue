@@ -74,11 +74,12 @@
         group[String.fromCharCode(i)] = groupCityList.value[String.fromCharCode(i)]
       }
     }
+    console.log('12313');
     return group
   })
   const goToCity = () => {
     uni.navigateTo({
-      url: `/subpkg/location/location?city_id=${curCityList.value.id}&geohash=${ + curCityList.value.latitude},${curCityList.value.longitude}`
+      url: `/subpkg/location/location?city_id=${curCityList.value.id}&geohash=${curCityList.value.latitude},${curCityList.value.longitude}`
     });
   }
   const changeCur = (item) => {

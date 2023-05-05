@@ -38,7 +38,7 @@ const _sfc_main = {
           emit("searchContext", res);
         } else {
           res = await utils_request.request({
-            url: `v4/restaurants?geohash=${geohash2.value}&keyword=${keyword.value}`
+            url: `v4/restaurants?geohash=${geohash2.value}&keyword=${encodeURI(keyword.value)}`
           });
           emit("searchRestaurants", res);
         }

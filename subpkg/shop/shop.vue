@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <view class="shop-container" v-if="res">
+    <view class="shop-container" v-if="curWindowWidth>20">
       <view class="shop-info">
         <view class="name-time">
           <view class="name">{{res.name}}</view>

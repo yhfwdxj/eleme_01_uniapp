@@ -132,8 +132,8 @@ const _sfc_main = {
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.unref(res)
-      }, common_vendor.unref(res) ? {
+        a: common_vendor.unref(curWindowWidth) > 20
+      }, common_vendor.unref(curWindowWidth) > 20 ? {
         b: common_vendor.t(common_vendor.unref(res).name),
         c: common_vendor.t(common_vendor.unref(res).rating),
         d: common_vendor.t(common_vendor.unref(res).delivery_mode.text),
