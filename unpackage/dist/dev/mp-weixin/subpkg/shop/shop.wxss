@@ -244,6 +244,9 @@
   display: flex;
   flex-wrap: wrap;
 }
+.container .food-review .review .tag .tag-color.data-v-5cef12df {
+  background-color: #03b5fd;
+}
 .container .food-review .review .tag .tag-info.data-v-5cef12df {
   display: flex;
   padding: 10rpx;

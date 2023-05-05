@@ -1,5 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_message = require("../../utils/message.js");
+const utils_request = require("../../utils/request.js");
 if (!Array) {
   const _easycom_my_search2 = common_vendor.resolveComponent("my-search");
   const _easycom_my_restaurants2 = common_vendor.resolveComponent("my-restaurants");
@@ -14,7 +16,6 @@ const _sfc_main = {
   __name: "index",
   setup(__props) {
     const store = common_vendor.useStore();
-    const request = common_vendor.inject("request");
     store.dispatch("city/getCityList", "guess");
     let resList = common_vendor.reactive({
       curCityList: "",
@@ -35,7 +36,8 @@ const _sfc_main = {
       });
     };
     common_vendor.onLoad(async () => {
-      let res = await request({
+      utils_message.loading();
+      let res = await utils_request.request({
         url: "v2/index_entry"
       });
       res = res.map((item) => {
@@ -79,6 +81,11 @@ const _sfc_main = {
       });
     };
     const placeholder = common_vendor.ref("请输入商家或美食");
+    const test = () => {
+      common_vendor.index.navigateTo({
+        url: `/subpkg/swiperShop/swiperShop?latitude=${latitude.value}&longitude=${longitude.value}`
+      });
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(location)
@@ -97,15 +104,17 @@ const _sfc_main = {
         j: common_vendor.f(common_vendor.unref(data1), (item, index, i0) => {
           return {
             a: item.image_url,
-            b: common_vendor.t(item.title),
-            c: index
+            b: common_vendor.o(test, index),
+            c: common_vendor.t(item.title),
+            d: index
           };
         }),
         k: common_vendor.f(common_vendor.unref(data2), (item, index, i0) => {
           return {
             a: item.image_url,
-            b: common_vendor.t(item.title),
-            c: index
+            b: common_vendor.o(test, index),
+            c: common_vendor.t(item.title),
+            d: index
           };
         }),
         l: common_vendor.p({

@@ -16,7 +16,8 @@
         "address/address",
         "remark/remark",
         "login/login",
-        "userInfo/userInfo"
+        "userInfo/userInfo",
+        "swiperShop/swiperShop"
       ]
     }
   ],

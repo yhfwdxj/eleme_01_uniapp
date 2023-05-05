@@ -48,14 +48,15 @@
   import {
     useStore
   } from 'vuex'
+  import {
+    loading
+  } from '@/utils/message.js'
   const store = useStore()
   onLoad(() => {
+    loading()
     store.dispatch('city/getCityList', 'guess')
     store.dispatch('city/getCityList', 'hot')
     store.dispatch('city/getCityList', 'group')
-    nextTick(() => {
-
-    })
   })
   let char = ref([])
   const curCityList = computed(() => store.state.city.curCityList)

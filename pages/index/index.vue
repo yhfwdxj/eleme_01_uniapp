@@ -22,7 +22,7 @@
       <swiper-item>
         <view class="nav">
           <view class="nav-list" v-for="item,index in data1" :key="index">
-            <img :src="item.image_url" alt="">
+            <img :src="item.image_url" @click="test">
             <text>{{item.title}}</text>
           </view>
         </view>
@@ -30,7 +30,7 @@
       <swiper-item>
         <view class="nav">
           <view class="nav-list" v-for="item,index in data2" :key="index">
-            <img :src="item.image_url" alt="">
+            <img :src="item.image_url" @click="test">
             <text>{{item.title}}</text>
           </view>
         </view>
@@ -43,7 +43,6 @@
 </template>
 <script setup>
   import {
-    inject,
     ref,
     computed,
     reactive
@@ -56,8 +55,13 @@
   import {
     useStore
   } from 'vuex'
+  import {
+    loading
+  } from '@/utils/message.js'
+  import {
+    request
+  } from '@/utils/request.js'
   const store = useStore()
-  const request = inject('request')
   store.dispatch('city/getCityList', 'guess')
   let resList = reactive({
     curCityList: '',
@@ -78,6 +82,7 @@
     })
   }
   onLoad(async () => {
+    loading()
     let res = await request({
       url: 'v2/index_entry'
     })
@@ -122,6 +127,11 @@
     })
   }
   const placeholder = ref('请输入商家或美食')
+  const test = () => {
+    uni.navigateTo({
+      url: `/subpkg/swiperShop/swiperShop?latitude=${latitude.value}&longitude=${longitude.value}`
+    })
+  }
   // https://fuss10.elemecdn.com
 </script>
 <style lang="scss">

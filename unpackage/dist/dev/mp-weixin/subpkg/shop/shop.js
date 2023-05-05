@@ -20,6 +20,7 @@ const _sfc_main = {
     let rating = common_vendor.ref();
     let scores = common_vendor.ref();
     let tag = common_vendor.ref();
+    let tagIndex = common_vendor.ref(0);
     let curWindowWidth = common_vendor.ref("");
     let shopId = common_vendor.ref("");
     common_vendor.ref([]);
@@ -126,6 +127,9 @@ const _sfc_main = {
         url: `/subpkg/shopOrder/shopOrder?id=${res.value.id}&longitude=${res.value.longitude}&latitude=${res.value.latitude}`
       });
     };
+    const changeTag = (i) => {
+      tagIndex.value = i;
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(res)
@@ -230,7 +234,9 @@ const _sfc_main = {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.count),
-            c: i
+            c: i,
+            d: common_vendor.o(($event) => changeTag(i), i),
+            e: common_vendor.n(common_vendor.unref(tagIndex) === i ? "tag-color" : "")
           };
         }),
         P: common_vendor.t(common_vendor.unref(rating)[0].username),

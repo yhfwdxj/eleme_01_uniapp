@@ -92,6 +92,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "swiperShop/swiperShop",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 
   }],

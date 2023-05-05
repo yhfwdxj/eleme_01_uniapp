@@ -158,7 +158,8 @@
           </view>
         </view>
         <view class="tag">
-          <view class="tag-info" v-for="item,i in tag" :key="i">
+          <view class="tag-info" v-for="item,i in tag" :key="i" @click="changeTag(i)"
+            :class="tagIndex===i?'tag-color':''">
             <view>{{item.name}}</view>&nbsp;
             <view>{{item.count}}</view>
           </view>
@@ -247,6 +248,7 @@
   let rating = ref()
   let scores = ref()
   let tag = ref()
+  let tagIndex = ref(0)
   let curWindowWidth = ref('')
   let shopId = ref('')
   let leftScrollTop = ref([])
@@ -357,6 +359,9 @@
       duration: 1000,
       timingFunction: 'linear',
     })
+  }
+  const changeTag = (i) => {
+    tagIndex.value = i
   }
 </script>
 
@@ -662,6 +667,10 @@
         .tag {
           display: flex;
           flex-wrap: wrap;
+
+          .tag-color {
+            background-color: rgb(3, 181, 253);
+          }
 
           .tag-info {
             @extend %box-shadows;

@@ -21,6 +21,7 @@ if (!Math) {
   "./subpkg/remark/remark.js";
   "./subpkg/login/login.js";
   "./subpkg/userInfo/userInfo.js";
+  "./subpkg/swiperShop/swiperShop.js";
 }
 const _sfc_main = {
   onLaunch: function() {

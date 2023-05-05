@@ -30,10 +30,11 @@
   let res2 = ref('')
   id.value = props.cityId
   geohash.value = props.geohash
+  let geohash2 = ref('')
   onLoad(() => {
     if (uni.getStorageSync('address')) {
       let cur = JSON.parse(uni.getStorageSync('address') || '{}')
-      let geohash2 = `${cur.location.lat},${cur.location.lng}`
+      geohash2.value = `${cur.location.lat},${cur.location.lng}`
     }
   })
   const blurChange = (e) => {
@@ -41,25 +42,22 @@
   }
   const search = async () => {
     isFocus.value = false
-    console.log(1, keyword);
     let test
     clearTimeout(test)
     test = setTimeout(async () => {
       if (id.value && keyword.value) {
-        console.log(2, keyword);
         res = await uni.request({
           url: `http://apis.map.qq.com/ws/place/v1/search?key=PVABZ-4IO6D-4WK47-PKUCM-TD4DV-WOF6U&keyword=${encodeURI(keyword.value)}&boundary=nearby(${geohash.value},1000,1)`,
           method: 'get'
         })
         emit('searchContext', res)
       } else {
-        console.log(3, keyword);
         res = await request(({
-          url: `v4/restaurants?geohash=${geohash2}&keyword=${keyword.value}`
+          url: `v4/restaurants?geohash=${geohash2.value}&keyword=${keyword.value}`
         }))
         emit('searchRestaurants', res)
       }
-    }, 300)
+    }, 100)
   }
 </script>
 

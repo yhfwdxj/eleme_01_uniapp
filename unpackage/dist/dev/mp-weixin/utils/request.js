@@ -14,6 +14,9 @@ const request = (options) => {
       },
       fail(err) {
         return reject("err");
+      },
+      complete: () => {
+        common_vendor.index.hideToast();
       }
     });
   });

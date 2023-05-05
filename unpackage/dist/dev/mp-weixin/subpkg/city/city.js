@@ -1,15 +1,15 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_message = require("../../utils/message.js");
 const _sfc_main = {
   __name: "city",
   setup(__props) {
     const store = common_vendor.useStore();
     common_vendor.onLoad(() => {
+      utils_message.loading();
       store.dispatch("city/getCityList", "guess");
       store.dispatch("city/getCityList", "hot");
       store.dispatch("city/getCityList", "group");
-      common_vendor.nextTick$1(() => {
-      });
     });
     let char = common_vendor.ref([]);
     const curCityList = common_vendor.computed(() => store.state.city.curCityList);

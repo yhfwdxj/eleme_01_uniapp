@@ -15797,7 +15797,6 @@ exports.e = e;
 exports.f = f;
 exports.getCurrentInstance = getCurrentInstance;
 exports.index = index;
-exports.inject = inject;
 exports.isRef = isRef;
 exports.n = n;
 exports.nextTick$1 = nextTick$1;
