@@ -17,6 +17,8 @@ npm install
 ### 登录
 ![登录](https://github.com/yhfwdxj/eleme_01_uniapp/blob/master/elmuni/login.gif)
 ![登录验证](https://github.com/yhfwdxj/eleme_01_uniapp/blob/master/elmuni/loginFail.gif)
+### 搜索餐馆
+![搜索](https://github.com/yhfwdxj/eleme_01_uniapp/blob/master/elmuni/search.gif)
 ### 商家页面
 ![商家](https://github.com/yhfwdxj/eleme_01_uniapp/blob/master/elmuni/shop.gif)
 ### 下订单
