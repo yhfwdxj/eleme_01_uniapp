@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "my-shopcart": "../../components/my-shopcart/my-shopcart",
-    "my-star": "../../components/my-star/my-star"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "my-star": "../my-star/my-star"
-  }
-}

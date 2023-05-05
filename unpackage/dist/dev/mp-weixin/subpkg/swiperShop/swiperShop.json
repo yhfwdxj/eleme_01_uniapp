@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "my-restaurants": "../../components/my-restaurants/my-restaurants"
-  }
-}

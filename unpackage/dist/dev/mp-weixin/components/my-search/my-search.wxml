@@ -1,1 +1,0 @@
-<view class="my-search"><view class="search"><input type="search" placeholder="{{a}}" class="input-search" focus="{{b}}" bindblur="{{c}}" value="{{d}}" bindinput="{{e}}"></input></view><view class="text-container" bindtap="{{f}}"><text>搜索</text></view></view>
