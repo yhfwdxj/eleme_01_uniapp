@@ -6,7 +6,8 @@
 
 <script setup>
   import {
-    reactive
+    reactive,
+    computed
   } from 'vue'
   import {
     onLoad,

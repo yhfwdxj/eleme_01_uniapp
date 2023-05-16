@@ -22,7 +22,7 @@
       <swiper-item>
         <view class="nav">
           <view class="nav-list" v-for="item,index in data1" :key="index">
-            <img :src="item.image_url" @click="test">
+            <img :src="item.image_url" @click="swiper">
             <text>{{item.title}}</text>
           </view>
         </view>
@@ -30,7 +30,7 @@
       <swiper-item>
         <view class="nav">
           <view class="nav-list" v-for="item,index in data2" :key="index">
-            <img :src="item.image_url" @click="test">
+            <img :src="item.image_url" @click="swiper">
             <text>{{item.title}}</text>
           </view>
         </view>
@@ -108,6 +108,10 @@
         order_by: 4,
         limit: 10
       })
+    } else {
+      uni.navigateTo({
+        url: `/subpkg/city/city`
+      })
     }
   })
   let offset = 10
@@ -127,7 +131,7 @@
     })
   }
   const placeholder = ref('请输入商家或美食')
-  const test = () => {
+  const swiper = () => {
     uni.navigateTo({
       url: `/subpkg/swiperShop/swiperShop?latitude=${latitude.value}&longitude=${longitude.value}`
     })
