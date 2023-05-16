@@ -74,7 +74,8 @@
         group[String.fromCharCode(i)] = groupCityList.value[String.fromCharCode(i)]
       }
     }
-    console.log('12313');
+    console.log(1);
+    console.log(group);
     return group
   })
   const goToCity = () => {

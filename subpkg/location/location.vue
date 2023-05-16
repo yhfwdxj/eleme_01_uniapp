@@ -2,9 +2,6 @@
   <view class="location-container" v-if="curCity">
     <view class="cur-city">
       <view>当前城市:{{curCity.name}}</view>
-      <view style="margin-right: 10rpx;color: blue;" @click="changeCity">
-        <text>切换城市</text>
-      </view>
     </view>
     <view class="input">
       <my-search :placeholder='placeholder' @searchContext='searchContext' :cityId='cityId' :geohash='geohash'>
@@ -66,11 +63,6 @@
       })
     }
   }
-  const changeCity = () => {
-    uni.navigateTo({
-      url: `/subpkg/city/city`
-    })
-  }
   let curplace = ref([])
   let setflag = true
   const curAddress = (item) => {
@@ -80,7 +72,6 @@
     let res = allplace.filter((item2) => {
       return !setPlace.has(item2.id) && setPlace.set(item2.id, item2.id)
     })
-    console.log(res);
     uni.setStorageSync('curplace', JSON.stringify(res))
     uni.removeStorageSync('address');
     uni.setStorageSync('address', JSON.stringify(item))
