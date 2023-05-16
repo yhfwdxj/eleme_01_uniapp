@@ -48,12 +48,8 @@
   import {
     useStore
   } from 'vuex'
-  import {
-    loading
-  } from '@/utils/message.js'
   const store = useStore()
   onLoad(() => {
-    loading()
     store.dispatch('city/getCityList', 'guess')
     store.dispatch('city/getCityList', 'hot')
     store.dispatch('city/getCityList', 'group')
@@ -74,8 +70,6 @@
         group[String.fromCharCode(i)] = groupCityList.value[String.fromCharCode(i)]
       }
     }
-    console.log(1);
-    console.log(group);
     return group
   })
   const goToCity = () => {

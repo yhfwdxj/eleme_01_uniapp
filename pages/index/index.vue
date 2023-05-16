@@ -56,9 +56,6 @@
     useStore
   } from 'vuex'
   import {
-    loading
-  } from '@/utils/message.js'
-  import {
     request
   } from '@/utils/request.js'
   const store = useStore()
@@ -82,7 +79,6 @@
     })
   }
   onLoad(async () => {
-    loading()
     let res = await request({
       url: 'v2/index_entry'
     })

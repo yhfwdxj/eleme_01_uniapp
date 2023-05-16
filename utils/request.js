@@ -14,9 +14,6 @@ export const request = (options) => {
       },
       fail(err) {
         return reject('err')
-      },
-      complete: () => {
-        uni.hideToast()
       }
     })
   })
