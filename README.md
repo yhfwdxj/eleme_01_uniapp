@@ -2,6 +2,8 @@
 ## 简介
 利用uniapp完成的仿饿了么点餐小程序，接口来源于[node-elm](https://github.com/bailicangdu/node-elm/blob/master/API.md)
 由于原接口是用于pc项目的，并且登录是利用cookies完成的，但是由于小程序中没有cookies，所以本项目的登录是使用mock来模拟。
+（我没有相关的工作经验，代码都是自己捣鼓的，现在看都觉得有很多不规范的地方，我甚至连注释都没写...所以想学习的朋友还是不要
+浪费时间来clone我这个项目了，还是看看github上优秀的项目学习吧。）
 ### 项目运行
 ```
 HbuilderX 微信开发者工具
